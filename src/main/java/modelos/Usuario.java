@@ -21,7 +21,7 @@ public class Usuario{
     private String apellido;
     private String correo;
     private String lugar_nacimiento;
-    private String ciudad_residencia;
+    //private String ciudad_residencia;
 
 
     @Column(columnDefinition =  "boolean default false")
