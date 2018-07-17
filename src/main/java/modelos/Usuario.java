@@ -21,7 +21,7 @@ public class Usuario{
     private String apellido;
     private String correo;
     private String lugar_nacimiento;
-    private String ciudad_residencia;
+   // private String ciudad_residencia;
 
 
     @Column(columnDefinition =  "boolean default false")
@@ -78,13 +78,13 @@ public class Usuario{
     }
 
 
-    public String getCiudad_residencia() {
+   /* public String getCiudad_residencia() {
         return ciudad_residencia;
     }
 
     public void setCiudad_residencia(String ciudad_residencia) {
         this.ciudad_residencia = ciudad_residencia;
-    }
+    }*/
 
     public Date getFecha_nacimiento() {
         return fecha_nacimiento;
