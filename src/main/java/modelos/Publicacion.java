@@ -63,6 +63,12 @@ public class Publicacion {
     public void setEtiquetas(Set<Etiqueta> etiquetas) {
         this.etiquetas = etiquetas;
     }
+
+    public void agregarEtiqueta(Etiqueta etiqueta) {
+    }
+
+    public void setAutor(Usuario usuario) {
+    }
 }
 
 
