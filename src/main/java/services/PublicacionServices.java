@@ -18,9 +18,22 @@ import static java.lang.Math.min;
 
 public class PublicacionServices extends GestionDb<Publicacion>{
 
+
+    private static PublicacionServices instancia;
+
+    public static PublicacionServices getInstancia(){
+        if(instancia==null){
+            instancia = new PublicacionServices();
+        }
+        return instancia;
+    }
+
     public PublicacionServices(){
         super(Publicacion.class);
     }
+
+
+
     public List<Publicacion> listaPublicacion() {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("select a from Publicacion a order by a.id desc");
@@ -67,16 +80,16 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         Publicacion publicacion = new Publicacion();
         publicacion.setAutor( new UsuarioServices().getUsuario(usuarioid) );
         publicacion.setDescripcion(descripcion);
-        publicacion.setEtiquetas(generarEtiquetas(tags));
+       // publicacion.setEtiquetas(generarEtiquetas(tags));
         crear(publicacion);
         return true;
     }
 
     //Actualizar los Articulos.
-    public boolean actualizarPublicacion(String descripcion, long usuarioid, String tags){
+    public boolean actualizarPublicacion(long id, String descripcion, long usuarioid, String tags){
         Publicacion publicacion = find(id);
         publicacion.setDescripcion(descripcion);
-        publicacion.setEtiquetas(generarEtiquetas(tags));
+     //   publicacion.setEtiquetas(generarEtiquetas(tags));
         crear(publicacion);
         return true;
     }
@@ -87,18 +100,6 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         return true;
     }
 
-    private Set<Etiqueta>generarEtiquetas(String etiquetas){
-        List<String> tagsList = Arrays.asList(etiquetas.split(",[ ]*"));
-        Set<Etiqueta> ans = new HashSet<>();
-
-        EtiquetaServices es = new EtiquetaServices();
-
-        for (String tagName : tagsList){
-            ans.add(  es.getEtiquetaByName( tagName ) );
-        }
-
-        return ans;
-    }
 }
 
 

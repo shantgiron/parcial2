@@ -23,13 +23,16 @@ public class Publicacion {
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Etiqueta> etiquetas;
+    private Set<Usuario> etiquetas;
 
-    public Publicacion(long id, String descripcion, Date fecha, Set<Etiqueta> etiquetas) {
+    public Publicacion(long id, String descripcion, Date fecha, Set<Usuario> etiquetas) {
         this.id = id;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.etiquetas = etiquetas;
+    }
+
+    public Publicacion() {
     }
 
     public long getId() {
@@ -56,15 +59,15 @@ public class Publicacion {
         this.fecha = fecha;
     }
 
-    public Set<Etiqueta> getEtiquetas() {
+    public Set<Usuario> getEtiquetas() {
         return etiquetas;
     }
 
-    public void setEtiquetas(Set<Etiqueta> etiquetas) {
+    public void setEtiquetas(Set<Usuario> etiquetas) {
         this.etiquetas = etiquetas;
     }
 
-    public void agregarEtiqueta(Etiqueta etiqueta) {
+    public void agregarEtiqueta(Usuario etiqueta) {
     }
 
     public void setAutor(Usuario usuario) {

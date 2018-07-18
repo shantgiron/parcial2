@@ -8,7 +8,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.lang.reflect.Field;
 import java.util.List;
 
-
 public class GestionDb<T> {
 
     private static EntityManagerFactory emf;
@@ -24,7 +23,7 @@ public class GestionDb<T> {
     }
 
     public EntityManager getEntityManager(){
-        return Persistence.createEntityManagerFactory("parcial2").createEntityManager();
+        return emf.createEntityManager();
     }
 
     /**
@@ -63,10 +62,22 @@ public class GestionDb<T> {
      */
     public void crear(T entidad){
         EntityManager em = getEntityManager();
+
+        try {
+            if (em.find(claseEntidad, getValorCampo(entidad)) != null) {
+                System.out.println("La entidad a guardar existe, no creada.");
+                return;
+            }
+        }catch (IllegalArgumentException ie){
+            //
+            System.out.println("Parametro ilegal.");
+        }
+
         em.getTransaction().begin();
         try {
             em.persist(entidad);
             em.getTransaction().commit();
+
         }catch (Exception ex){
             em.getTransaction().rollback();
             throw  ex;
