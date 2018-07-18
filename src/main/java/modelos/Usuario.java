@@ -28,15 +28,6 @@ public class Usuario{
     private boolean administrador;
 
 
-    @OneToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
-    private Set<CentroEducativo> centrosEducativos;
-
-    @OneToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
-    private Set<LugaresTrabajos> lugaresTrabajos;
-
-    @OneToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
-    private Set<Ciudad> ciudades;
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_nacimiento;
@@ -127,27 +118,4 @@ public class Usuario{
         this.administrador = administrador;
     }
 
-    public Set<CentroEducativo> getCentrosEducativos() {
-        return centrosEducativos;
-    }
-
-    public void setCentrosEducativos(Set<CentroEducativo> centrosEducativos) {
-        this.centrosEducativos = centrosEducativos;
-    }
-
-    public Set<LugaresTrabajos> getLugaresTrabajos() {
-        return lugaresTrabajos;
-    }
-
-    public void setLugaresTrabajos(Set<LugaresTrabajos> lugaresTrabajos) {
-        this.lugaresTrabajos = lugaresTrabajos;
-    }
-
-    public Set<Ciudad> getCiudades() {
-        return ciudades;
-    }
-
-    public void setCiudades(Set<Ciudad> ciudades) {
-        this.ciudades = ciudades;
-    }
 }

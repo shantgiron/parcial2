@@ -1,18 +1,13 @@
 package services;
 
 import modelos.Publicacion;
-import modelos.Etiqueta;
-import modelos.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static java.lang.Math.max;
-import static java.lang.Math.min;
 
 
 
@@ -53,14 +48,7 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         return lista;
     }
 
-    public Set<Publicacion> listaPublicacionesByTag(long tagID) {
-        EntityManager em = getEntityManager();
-        Query queryList = em.createQuery("select e from Etiqueta e where e.id =:tagID");
-        queryList.setParameter("tagID", tagID);
-        Etiqueta et = (Etiqueta) queryList.getSingleResult();
-        em.close();
-        return et.getPublicaciones();
-    }
+
 
     public long getCantidadPublicaciones(){
         EntityManager em = getEntityManager();

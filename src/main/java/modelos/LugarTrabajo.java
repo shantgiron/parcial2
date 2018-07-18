@@ -1,6 +1,5 @@
 package modelos;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,8 +7,7 @@ import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
-public class Ciudad {
-
+public class LugarTrabajo {
     @Id
     @GeneratedValue
     private long id;
@@ -17,15 +15,16 @@ public class Ciudad {
     private String nombre;
 
     @ManyToMany
-    private Set<Usuario> ciudadanos;
+    private Set<Usuario> trabajadores;
 
-    public Set<Usuario> getCiudadanos() {
-        return ciudadanos;
+    public Set<Usuario> getTrabajadores() {
+        return trabajadores;
     }
 
-    public void setCiudadanos(Set<Usuario> ciudadanos) {
-        this.ciudadanos = ciudadanos;
+    public void setTrabajadores(Set<Usuario> trabajadores) {
+        this.trabajadores = trabajadores;
     }
+
 
     public long getId() {
         return id;
@@ -42,5 +41,4 @@ public class Ciudad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
 }

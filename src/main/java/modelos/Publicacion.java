@@ -22,7 +22,7 @@ public class Publicacion {
     private Date fecha;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Usuario> etiquetas;
 
     public Publicacion(long id, String descripcion, Date fecha, Set<Usuario> etiquetas) {

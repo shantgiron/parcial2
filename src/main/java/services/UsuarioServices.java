@@ -66,6 +66,7 @@ public class UsuarioServices extends GestionDb<Usuario> {
         return true;
     }
 
+    //todo: hay que hacer esto con el ORM!!
     public boolean actualizarUsuario(Usuario usuario){
         boolean ok =false;
 
@@ -88,36 +89,6 @@ public class UsuarioServices extends GestionDb<Usuario> {
 
             //Indica el where...
             prepareStatement.setLong(9, usuario.getId());
-            //
-            int fila = prepareStatement.executeUpdate();
-            ok = fila > 0 ;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServices.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioServices.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return ok;
-    }
-
-    public boolean borrarUsuario(int id){
-        boolean ok =false;
-
-        Connection con = null;
-        try {
-
-            String query = "delete from Usuario where id = ?";
-            con = DB.getInstancia().getConexion();
-            //
-            PreparedStatement prepareStatement = con.prepareStatement(query);
-
-            //Indica el where...
-            prepareStatement.setInt(1, id);
             //
             int fila = prepareStatement.executeUpdate();
             ok = fila > 0 ;
