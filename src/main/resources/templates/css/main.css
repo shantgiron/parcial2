@@ -932,7 +932,7 @@ Description: "HTML-template"
       right: 0;
       bottom: 0;
       left: 0;
-      background-color: rgba(255, 94, 58, 0.95);
+      background-color: #6c757dd4;
       opacity: 1;
       z-index: auto; }
 
@@ -4706,7 +4706,7 @@ fieldset[disabled] .checkbox, fieldset[disabled] .checkbox input[type=checkbox],
     display: table-cell;
     vertical-align: middle; }
     .registration-login-form .nav-link.active {
-      fill: #ff5e3a;
+      fill: #212529;
       background-color: #fff;
       border-color: #e6ecf5; }
     .registration-login-form .nav-link svg {
