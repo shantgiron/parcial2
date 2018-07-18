@@ -11,6 +11,9 @@
         <class>modelos.LugarTrabajo</class>
         <class>modelos.Notificacion</class>
         <class>modelos.Publicacion</class>
+        <class>modelos.Amigo</class>
+        <class>modelos.Album</class>
+        <class>modelos.Comentario</class>
 
         <properties>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />-->

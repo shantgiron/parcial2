@@ -25,12 +25,16 @@ public class Publicacion {
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Usuario> etiquetas;
 
+    private String img;
+
     public Publicacion(long id, String descripcion, Date fecha, Set<Usuario> etiquetas) {
         this.id = id;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.etiquetas = etiquetas;
     }
+
+
 
     public Publicacion() {
     }
@@ -71,6 +75,14 @@ public class Publicacion {
     }
 
     public void setAutor(Usuario usuario) {
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }
 

@@ -1,4 +1,4 @@
-import modelos.Usuario;
+import rutas.ManejoRutasGenerales;
 import services.*;
 
 import javax.persistence.EntityManager;
@@ -57,7 +57,7 @@ public class Main {
         port(getHerokuAssignedPort());
 
         //Las rutas
-//        new ManejoRutas().rutas();
+        new ManejoRutasGenerales().rutas();
 
         //Aplicando los filtros
 //        new Filtros().aplicarFiltros();

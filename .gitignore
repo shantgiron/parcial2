@@ -34,4 +34,7 @@
 
 /.idea
 
+
+/.idea*
+
 /out
