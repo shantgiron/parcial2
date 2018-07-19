@@ -16,6 +16,19 @@ import static spark.Spark.*;
 
 public class ManejoRutasShant {
     public ManejoRutasShant() {
+        //Usuario admin por defecto
+        if (new UsuarioServices().getUsuarioByEmail("shantgiron@gmail.com") == null) {
+            Usuario usuario = new Usuario();
+            usuario.setPassword("admin");
+            usuario.setNombre("Shantall");
+            usuario.setApellido("Giron");
+            usuario.setCorreo("shantgiron@gmail.com");
+            usuario.setLugar_nacimiento("Santiago");
+            usuario.setCiudad_residencia("Santiago");
+
+            new UsuarioServices().crearUsuario(usuario);
+        }
+
         get("/inicio", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
 
@@ -76,6 +89,18 @@ public class ManejoRutasShant {
             modelo.put("usuario", request.session().attribute("usuario"));
 
             return renderThymeleaf(modelo,"/index");
+        });
+
+        get("/perfil", (request, response) -> {
+            Map<String, Object> modelo = new HashMap<>();
+
+            return renderThymeleaf(modelo,"/perfilUsuario");
+        });
+
+        get("/cerrarsesion", (request, response) -> {
+            request.session().invalidate();
+            response.redirect("/inicio");
+            return null;
         });
     }
 
