@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
 	<title>Landing Page</title>
@@ -256,45 +256,47 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Registrarse</div>
-						<form class="content">
+						<div th:if="${message}" class="alert alert-success m-1" th:text="|${mensaje}|"></div>
+						<form method="post" action="/inicio" class="content">
+							<input type="hidden" name="iniciarsesion" value="false">
 							<div class="row">
 								<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group label-floating is-empty">
 										<label class="control-label">Nombre</label>
-										<input class="form-control" placeholder="" type="text">
+										<input class="form-control" placeholder="" name="nombre" type="text">
 									</div>
 								</div>
 								<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
 									<div class="form-group label-floating is-empty">
 										<label class="control-label">Apellido</label>
-										<input class="form-control" placeholder="" type="text">
+										<input class="form-control" placeholder="" name="apellido" type="text">
 									</div>
 								</div>
 								<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 									<div class="form-group label-floating is-empty">
 										<label class="control-label">Email</label>
-										<input class="form-control" placeholder="" type="email">
+										<input class="form-control" placeholder="" name="correo" type="email">
 									</div>
 									<div class="form-group label-floating is-empty">
 										<label class="control-label">Contraseña</label>
-										<input class="form-control" placeholder="" type="password">
+										<input class="form-control" placeholder="" name="contrasena" type="password">
 									</div>
 
 									<div class="form-group date-time-picker label-floating">
 										<label class="control-label">Cumpleaños</label>
-										<input name="datetimepicker" value="10/24/1984" />
+										<input  name="cumpleanos" value="10/24/1984" />
 										<span class="input-group-addon">
 														<svg class="olymp-calendar-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-calendar-icon"></use></svg>
 													</span>
 									</div>
 
-									<div class="form-group label-floating is-select">
-										<label class="control-label">Genero</label>
-										<select class="selectpicker form-control">
-											<option value="MA">Hombre</option>
-											<option value="FE">Mujer</option>
-										</select>
-									</div>
+									<!--<div class="form-group label-floating is-select">-->
+										<!--<label class="control-label">Genero</label>-->
+										<!--<select class="selectpicker form-control">-->
+											<!--<option value="MA">Hombre</option>-->
+											<!--<option value="FE">Mujer</option>-->
+										<!--</select>-->
+									<!--</div>-->
 
 									<div class="remember">
 										<!--<div class="checkbox">
@@ -305,7 +307,7 @@
 										</div>-->
 									</div>
 
-									<a href="#" class="btn btn-purple btn-lg full-width">Registrarme!</a>
+									<button type="submit" class="btn btn-purple btn-lg full-width">Registrarme!</button>
 								</div>
 							</div>
 						</form>
@@ -313,16 +315,17 @@
 
 					<div class="tab-pane" id="profile" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Inicia sesion en tu cuenta</div>
-						<form class="content">
+						<form action="/inicio" method="post" class="content">
 							<div class="row">
+								<input type="hidden" name="iniciarsesion" value="true">
 								<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 									<div class="form-group label-floating is-empty">
-										<label class="control-label">Email</label>
-										<input class="form-control" placeholder="" type="email">
+										<label class="control-label">Usuario</label>
+										<input class="form-control" placeholder="" name="correo" type="email">
 									</div>
 									<div class="form-group label-floating is-empty">
 										<label class="control-label">Contraseña</label>
-										<input class="form-control" placeholder="" type="password">
+										<input class="form-control" placeholder="" name="contrasena" type="password">
 									</div>
 
 									<div class="remember">
@@ -336,7 +339,7 @@
 										<a href="#" class="forgot">Olvide mi contraseña</a>
 									</div>
 
-									<a href="#" class="btn btn-lg btn-primary full-width">Iniciar Sesion</a>
+									<button type="submit" class="btn btn-lg btn-primary full-width">Iniciar Sesion</button>
 
 
 									<p>No tienes una cuenta? <a href="#">Registrate!</a> Es muy simple, crea tu cuenta y disfruta de nuestra red social</p>

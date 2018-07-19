@@ -1,4 +1,5 @@
 import rutas.ManejoRutasGenerales;
+import rutas.ManejoRutasShant;
 import services.*;
 
 import javax.persistence.EntityManager;
@@ -25,9 +26,6 @@ public class Main {
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.close();
-
-
-
 
 
         //usuario administrador por defecto
@@ -58,6 +56,7 @@ public class Main {
 
         //Las rutas
         new ManejoRutasGenerales().rutas();
+        new ManejoRutasShant();
 
         //Aplicando los filtros
 //        new Filtros().aplicarFiltros();
