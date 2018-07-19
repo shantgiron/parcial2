@@ -11,6 +11,9 @@
         <class>modelos.LugarTrabajo</class>
         <class>modelos.Notificacion</class>
         <class>modelos.Publicacion</class>
+        <class>modelos.Amigo</class>
+        <class>modelos.Album</class>
+        <class>modelos.Comentario</class>
 
         <properties>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />-->
@@ -19,7 +22,7 @@
             <property name="javax.persistence.jdbc.user" value="sa" />
             <property name="javax.persistence.jdbc.password" value="" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="true"/>
             <!-- Indica como será la generación de las tablas en el motor-->
             <property name="javax.persistence.schema-generation.database.action" value="update"/>

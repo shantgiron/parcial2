@@ -54,6 +54,17 @@ public class UsuarioServices extends GestionDb<Usuario> {
         return usuario;
     }
 
+    public Usuario getUsuarioByEmail(String correo) {
+        Usuario usuario = null;
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select u from Usuario u where u.correo =:correo");
+        query.setParameter("correo", correo.trim());
+        List<Usuario> lista = query.getResultList();
+        if(lista.size() > 0) usuario = lista.get(0);
+        em.close();
+        return usuario;
+    }
+
     public boolean crearUsuario(Usuario usuario){
         //para guardar la contraseña cifrada
         StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
@@ -106,8 +117,8 @@ public class UsuarioServices extends GestionDb<Usuario> {
         return ok;
     }
 
-    public Usuario autenticarUsuario(String userName, String pass ){
-        Usuario usuario = getUsuarioByUserName(userName);
+    public Usuario autenticarUsuario(String correo, String pass ){
+        Usuario usuario = getUsuarioByEmail(correo );
 
         if( usuario == null ){ return  null; }
 
