@@ -1,7 +1,9 @@
 package rutas;
 
 
+import modelos.Publicacion;
 import modelos.Usuario;
+import services.PublicacionServices;
 import services.UsuarioServices;
 import spark.ModelAndView;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -87,8 +89,25 @@ public class ManejoRutasShant {
         get("/index", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("usuario", request.session().attribute("usuario"));
+            modelo.put("publicaciones", new PublicacionServices().listaPublicacion());
 
             return renderThymeleaf(modelo,"/index");
+        });
+
+        post("/index", (request, response) -> {
+            String descripcion = request.queryParams("descripcion");
+
+            Publicacion publicacion = new Publicacion();
+            publicacion.setAutor(request.attribute("usuario"));
+            publicacion.setDescripcion(descripcion);
+            publicacion.setFecha(new Date());
+            publicacion.setImg("");
+
+            new PublicacionServices().crear(publicacion);
+
+            response.redirect("/index");
+
+            return null;
         });
 
         get("/perfil", (request, response) -> {
