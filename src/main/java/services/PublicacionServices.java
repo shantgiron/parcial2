@@ -73,7 +73,7 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         return true;
     }
 
-    //Actualizar los Articulos.
+    //Actualizar las publicaciones
     public boolean actualizarPublicacion(long id, String descripcion, long usuarioid, String tags){
         Publicacion publicacion = find(id);
         publicacion.setDescripcion(descripcion);
@@ -82,7 +82,7 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         return true;
     }
 
-    //Metodo borrar los Articulos
+    //Metodo borrar las publicaciones
     public boolean borrarPublicacion(long id, long usuarioid){
         eliminar(id);
         return true;
