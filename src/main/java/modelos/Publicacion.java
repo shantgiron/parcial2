@@ -21,17 +21,21 @@ public class Publicacion {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Usuario usuario;
+
 
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Usuario> etiquetas;
 
     private String img;
 
-    public Publicacion(long id, String descripcion, Date fecha, Set<Usuario> etiquetas) {
+    public Publicacion(long id, String descripcion, Date fecha, Set<Usuario> etiquetas, Usuario usuario) {
         this.id = id;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.etiquetas = etiquetas;
+        this.usuario = usuario;
     }
 
 
@@ -83,6 +87,14 @@ public class Publicacion {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
 

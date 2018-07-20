@@ -100,6 +100,7 @@ public class ManejoRutasShant {
             Publicacion publicacion = new Publicacion();
             publicacion.setAutor(request.attribute("usuario"));
             publicacion.setDescripcion(descripcion);
+            publicacion.setUsuario(request.session().attribute("usuario"));
             publicacion.setFecha(new Date());
             publicacion.setImg("");
 
