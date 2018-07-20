@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
 	<title>Timeline</title>
@@ -174,7 +174,7 @@
 
 								<svg class="olymp-status-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-status-icon"></use></svg>
 
-								<span>Status</span>
+								<span>Estado</span>
 							</a>
 						</li>
 					</ul>
@@ -263,7 +263,7 @@
 
 			<div id="newsfeed-items-grid">
 
-				<div class="ui-block">
+				<div class="ui-block" th:each="publicacion:${listaPublicacion}">
 					
 					<article class="hentry post video">
 					
@@ -271,8 +271,8 @@
 							<img src="img/avatar7-sm.jpg" alt="author">
 					
 							<div class="author-date">
-								<a class="h6 post__author-name fn" href="#">Marina Valentine</a> shared a <a href="#">link</a>
-								<div class="post__date">
+								<a class="h6 post__author-name fn" th:text="${usuario.username}">Marina Valentine </a> shared a link
+								<div class="post__date" th:text="${publicacion.fecha}">
 									<time class="published" datetime="2004-07-24T18:18">
 										March 4 at 2:05pm
 									</time>
@@ -298,7 +298,7 @@
 					
 						</div>
 					
-						<p>Hey <a href="#">Cindi</a>, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+						<p  th:text="${ #strings.abbreviate(publicacion.descripcion,200)}">Hey Cindi, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
 					
 
 						<div class="post-additional-info inline-items">
@@ -358,16 +358,16 @@
 				<a href="#" class="upload-photo-item">
 				<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
 
-				<h6>Upload Photo</h6>
-				<span>Browse your computer.</span>
+				<h6>Subir foto</h6>
+				<span>Subir desde la PC.</span>
 			</a>
 
 				<a href="#" class="upload-photo-item" data-toggle="modal" data-target="#choose-from-my-photo">
 
 			<svg class="olymp-photos-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-photos-icon"></use></svg>
 
-			<h6>Choose from My Photos</h6>
-			<span>Choose from your uploaded photos</span>
+			<h6>Seleccionar de mis fotos</h6>
+			<span>Selecciona de tus fotos en la red social</span>
 		</a>
 			</div>
 		</div>
