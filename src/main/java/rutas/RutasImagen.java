@@ -30,32 +30,16 @@ public void rutas(){
 
 
     post("/foto/perfil/", (req, res) -> {
-
-
-        Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
-
-        req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
-
-        try (InputStream input = req.raw().getPart("foto").getInputStream()) {
-            Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
-        }
-
-        logInfo(req, tempFile);
-        return "<h1>You uploaded this image:<h1><img> src='529703901033081479.png'>";
-
-      /*  Usuario usr = UsuarioServices.getLogUser(req);
-        usr.setFotoPerfil("<img " + tempFile.getFileName().toString() +">");
+        String img = guardarImagen("foto", uploadDir, req);
+        Usuario usr = UsuarioServices.getLogUser(req);
+        usr.setFotoPerfil(img);
         UsuarioServices.getInstancia().actualizarUsuario(usr);
-*/  });
+        return "Perfil actualizado a: " + img;
+
+    });
 
 }
 
-
-
-    // methods used for logging
-    private static void logInfo(Request req, Path tempFile) throws IOException, ServletException {
-        System.out.println("Uploaded file '" + getFileName(req.raw().getPart("uploaded_file")) + "' saved as '" + tempFile.toAbsolutePath() + "'");
-    }
 
     private static String getFileName(Part part) {
         for (String cd : part.getHeader("content-disposition").split(";")) {
@@ -65,4 +49,21 @@ public void rutas(){
         }
         return null;
     }
+
+
+    private String guardarImagen(String campo, File uploadDir,  Request req) throws IOException {
+
+        Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+
+        req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+        try (InputStream input = req.raw().getPart(campo).getInputStream()) {
+            Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
+
+        return "<img src='/" + tempFile.getFileName() +"'>";
+    }
+
 }
