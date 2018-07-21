@@ -1,5 +1,6 @@
 import rutas.ManejoRutasGenerales;
 import rutas.ManejoRutasShant;
+import rutas.RutasImagen;
 import services.*;
 
 import javax.persistence.EntityManager;
@@ -19,7 +20,7 @@ public class Main {
         DB.getInstancia().testConexion();
 
         //indicando los recursos publicos, con esto se puede acceder a ellos sin hacerle metodos get ni post ni nada de eso
-        staticFiles.location("/templates");
+      //  staticFiles.location("/templates");
 
 
         EntityManagerFactory emf =  Persistence.createEntityManagerFactory("parcial2");
@@ -55,8 +56,10 @@ public class Main {
         port(getHerokuAssignedPort());
 
         //Las rutas
+        new RutasImagen().rutas();
         new ManejoRutasGenerales().rutas();
         new ManejoRutasShant();
+
 
         //Aplicando los filtros
 //        new Filtros().aplicarFiltros();

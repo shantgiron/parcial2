@@ -2,6 +2,8 @@ package services;
 
 import modelos.Usuario;
 import org.jasypt.util.password.StrongPasswordEncryptor;
+import spark.Request;
+import spark.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -77,44 +79,9 @@ public class UsuarioServices extends GestionDb<Usuario> {
         return true;
     }
 
-    //todo: hay que hacer esto con el ORM!!
     public boolean actualizarUsuario(Usuario usuario){
-        boolean ok =false;
-
-        Connection con = null;
-        try {
-
-            String query = "update Usuario set nombre=?, USERNAME=?, PASSWORD=?, ADMINISTRADOR=?, apellido=?, correo=?, lugar_nacimiento=?, fecha_nacimiento=?  where id = ?";
-            con = DB.getInstancia().getConexion();
-            //
-            PreparedStatement prepareStatement = con.prepareStatement(query);
-            //Antes de ejecutar seteo los parametros.
-            prepareStatement.setString(1, usuario.getNombre());
-            prepareStatement.setString(2, usuario.getUsername());
-            prepareStatement.setString(3, usuario.getPassword());
-            prepareStatement.setBoolean(4, usuario.isAdministrador());
-            prepareStatement.setString(5, usuario.getApellido());
-            prepareStatement.setString(6, usuario.getCorreo());
-            prepareStatement.setString(7, usuario.getLugar_nacimiento());
-            prepareStatement.setDate(8, (Date) usuario.getFecha_nacimiento());
-
-            //Indica el where...
-            prepareStatement.setLong(9, usuario.getId());
-            //
-            int fila = prepareStatement.executeUpdate();
-            ok = fila > 0 ;
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServices.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioServices.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return ok;
+        editar(usuario);
+        return true;
     }
 
     public Usuario autenticarUsuario(String correo, String pass ){
@@ -128,6 +95,19 @@ public class UsuarioServices extends GestionDb<Usuario> {
         } else {
             return null;
         }
+    }
+
+    public static Usuario getLogUser(Request request){
+        Usuario usuario = new Usuario();
+        Session session = request.session(true);
+        if(request.cookie("usuario") != null){
+            UsuarioServices us = new UsuarioServices();
+            usuario = us.getUsuario(Integer.parseInt(request.cookie("usuario")));
+            session.attribute("usuario", usuario);
+        }
+        if(session.attribute("usuario") != null) usuario = session.attribute("usuario");
+
+        return usuario;
     }
 
 }

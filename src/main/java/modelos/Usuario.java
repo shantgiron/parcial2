@@ -23,6 +23,20 @@ public class Usuario{
     private String lugar_nacimiento;
     private String ciudad_residencia;
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
+    private String fotoPerfil;
+
 
     @Column(columnDefinition =  "boolean default false")
     private boolean administrador;
