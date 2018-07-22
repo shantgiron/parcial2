@@ -98,7 +98,7 @@ public class ManejoRutasShant {
             String descripcion = request.queryParams("descripcion");
 
             Publicacion publicacion = new Publicacion();
-            publicacion.setAutor(request.attribute("usuario"));
+            //publicacion.setAutor(request.attribute("usuario"));
             publicacion.setDescripcion(descripcion);
             publicacion.setUsuario(request.session().attribute("usuario"));
             publicacion.setFecha(new Date());

@@ -66,7 +66,7 @@ public class PublicacionServices extends GestionDb<Publicacion>{
 
     public boolean crearPublicacion(String descripcion, long usuarioid, String tags){
         Publicacion publicacion = new Publicacion();
-        publicacion.setAutor( new UsuarioServices().getUsuario(usuarioid) );
+        publicacion.setUsuario( new UsuarioServices().getUsuario(usuarioid) );
         publicacion.setDescripcion(descripcion);
        // publicacion.setEtiquetas(generarEtiquetas(tags));
         crear(publicacion);

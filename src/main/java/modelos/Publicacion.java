@@ -78,9 +78,6 @@ public class Publicacion {
     public void agregarEtiqueta(Usuario etiqueta) {
     }
 
-    public void setAutor(Usuario usuario) {
-    }
-
     public String getImg() {
         return img;
     }
