@@ -43,19 +43,6 @@ public class ManejoRutasGenerales {
         return salida;
     }
 
-    private Usuario getLogUser(Request request){
-            Usuario usuario = new Usuario();
-            Session session = request.session(true);
-            if(request.cookie("usuario") != null){
-                UsuarioServices us = new UsuarioServices();
-                usuario = us.getUsuario(Integer.parseInt(request.cookie("usuario")));
-                session.attribute("usuario", usuario);
-            }
-            if(session.attribute("usuario") != null) usuario = session.attribute("usuario");
-
-        return usuario;
-    }
-
 
 
 }

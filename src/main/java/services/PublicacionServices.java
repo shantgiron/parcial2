@@ -78,7 +78,7 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         Publicacion publicacion = find(id);
         publicacion.setDescripcion(descripcion);
      //   publicacion.setEtiquetas(generarEtiquetas(tags));
-        crear(publicacion);
+        editar(publicacion);
         return true;
     }
 
