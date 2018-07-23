@@ -14,7 +14,6 @@ import static spark.Spark.*;
 public class RutasImagen {
 
 public void rutas(){
-
     File uploadDir = new File("fotos");
     uploadDir.mkdir();//por si el folder no esta
 
@@ -60,11 +59,12 @@ public void rutas(){
     }
 
 
-    private String guardarImagen(String campo, File uploadDir,  Request req) throws IOException {
+    public static String guardarImagen(String campo, File uploadDir,  Request req) throws IOException {
 
         Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
 
         req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
 
         try (InputStream input = req.raw().getPart(campo).getInputStream()) {
             Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);

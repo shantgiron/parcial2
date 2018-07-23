@@ -24,7 +24,8 @@ public class Publicacion {
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuario;
 
-
+    //el id del usuario dueño del muro
+    private Long muro_de;
 
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Usuario> etiquetas;
@@ -94,6 +95,16 @@ public class Publicacion {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    public Long getMuro_de() {
+        return muro_de;
+    }
+
+    public void setMuro_de(Long muro_de) {
+        this.muro_de = muro_de;
+    }
+
+
+
 }
 
 

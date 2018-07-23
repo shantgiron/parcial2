@@ -9,6 +9,7 @@ import spark.ModelAndView;
 import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -19,6 +20,10 @@ import static spark.Spark.*;
 
 public class ManejoRutasShant {
     public ManejoRutasShant() {
+        File uploadDir = new File("fotos");
+        uploadDir.mkdir();
+
+
         //Usuario admin por defecto
         if (new UsuarioServices().getUsuarioByEmail("admin@admin.com") == null) {
             Usuario usuario = new Usuario();
@@ -30,6 +35,7 @@ public class ManejoRutasShant {
             usuario.setCiudad_residencia("Santiago");
             usuario.setFotoPerfil("/img/badge4.png");
             usuario.setFotoPortada("img/top-header1.jpg");
+            usuario.setAdmin(true);
 
             new UsuarioServices().crearUsuario(usuario);
         }
@@ -98,6 +104,7 @@ public class ManejoRutasShant {
 
                 usuario.setFotoPerfil("/img/badge3.png");
                 usuario.setFotoPortada("/img/top-header1.jpg");
+                usuario.setAdmin(true);
 
                 new UsuarioServices().crearUsuario(usuario);
 

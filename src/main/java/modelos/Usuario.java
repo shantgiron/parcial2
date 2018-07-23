@@ -23,6 +23,15 @@ public class Usuario{
     private String ciudad_residencia;
     private String fotoPerfil;
     private String fotoPortada;
+    private boolean admin = false;
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 
     public String getFotoPortada() {
         return fotoPortada;
