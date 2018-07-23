@@ -20,7 +20,7 @@ public class Main {
         DB.getInstancia().testConexion();
 
         //indicando los recursos publicos, con esto se puede acceder a ellos sin hacerle metodos get ni post ni nada de eso
-      //  staticFiles.location("/templates");
+        staticFiles.location("/templates");
 
 
         EntityManagerFactory emf =  Persistence.createEntityManagerFactory("parcial2");
