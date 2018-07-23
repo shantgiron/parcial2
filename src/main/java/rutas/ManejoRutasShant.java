@@ -119,7 +119,7 @@ public class ManejoRutasShant {
             //publicacion.setAutor(request.attribute("usuario"));
             publicacion.setDescripcion(descripcion);
             System.out.println(UsuarioServices.getLogUser(request).getId());
-           // publicacion.setUsuario(UsuarioServices.getLogUser(request));
+            publicacion.setUsuario(UsuarioServices.getLogUser(request));
             publicacion.setFecha(new Date());
             publicacion.setImg("");
 
