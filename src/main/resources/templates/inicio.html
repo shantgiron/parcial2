@@ -73,7 +73,7 @@
 					<div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Registrarse</div>
 						<div class="alert alert-success m-1" th:text="${mensaje}"></div>
-						<form method="post" action="/inicio" class="content">
+						<form method="post" action="/inicio" class="content" name="registrationForm" >
 							<input type="hidden" name="iniciarsesion" value="false">
 							<div class="row">
 								<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -197,6 +197,7 @@
 <script defer src="fonts/fontawesome-all.js"></script>
 
 <script src="Bootstrap/dist/js/bootstrap.bundle.js"></script>
+
 
 </body>
 </html>
