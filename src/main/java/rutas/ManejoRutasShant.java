@@ -97,7 +97,7 @@ public class ManejoRutasShant {
                 usuario.setFecha_nacimiento(new SimpleDateFormat("mm/dd/yyyy").parse(cumpleanos));
 
                 usuario.setFotoPerfil("/img/badge3.png");
-                usuario.setFotoPortada("img/top-header1.jpg");
+                usuario.setFotoPortada("/img/top-header1.jpg");
 
                 new UsuarioServices().crearUsuario(usuario);
 
