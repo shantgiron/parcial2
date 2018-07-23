@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Notificacion {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(columnDefinition = "text")
     private String descripcion;
@@ -17,11 +17,11 @@ public class Notificacion {
     @Column(columnDefinition = "text")
     private String vinculo;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

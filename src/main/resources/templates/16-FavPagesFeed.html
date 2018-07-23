@@ -234,7 +234,7 @@
 			<div class="control-block">
 				<div class="author-page author vcard inline-items">
 					<div class="author-thumb">
-						<img alt="author" src="img/author-page.jpg" class="avatar">
+						<img alt="author"  th:src="${usuario.fotoPerfil}" width="40" height="40"   class="avatar">
 						<span class="icon-status online"></span>
 					</div>
 					<a href="perfilUsuario.html" class="author-name fn">
@@ -1247,7 +1247,7 @@
 
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
-					<img alt="author" src="img/author-page.jpg" class="avatar">
+					<img alt="author"  th:src="${usuario.fotoPerfil}" width="40" height="40"   class="avatar">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -1768,7 +1768,7 @@
 					<article class="hentry post has-post-thumbnail">
 					
 						<div class="post__author author vcard inline-items">
-							<img src="img/author-page.jpg" alt="author">
+							<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 					
 							<div class="author-date">
 								<a class="h6 post__author-name fn" href="perfilUsuario.html">James Spiegel</a>
@@ -2002,7 +2002,7 @@
 					<ul class="comments-list">
 						<li class="comment-item">
 							<div class="post__author author vcard inline-items">
-								<img src="img/author-page.jpg" alt="author">
+								<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 					
 								<div class="author-date">
 									<a class="h6 post__author-name fn" href="perfilUsuario.html">James Spiegel</a>
@@ -2064,7 +2064,7 @@
 					<form class="comment-form inline-items">
 					
 						<div class="post__author author vcard inline-items">
-							<img src="img/author-page.jpg" alt="author">
+							<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 					
 							<div class="form-group with-icon-right ">
 								<textarea class="form-control" placeholder=""></textarea>
@@ -2851,7 +2851,7 @@
 
 					<li>
 						<div class="author-thumb">
-							<img src="img/author-page.jpg" alt="author" class="mCS_img_loaded">
+							<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author" class="mCS_img_loaded">
 						</div>
 						<div class="notification-event">
 							<span class="chat-message-item">Don’t worry Mathilda!</span>

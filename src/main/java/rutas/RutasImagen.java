@@ -34,8 +34,17 @@ public void rutas(){
         Usuario usr = UsuarioServices.getLogUser(req);
         usr.setFotoPerfil(img);
         UsuarioServices.getInstancia().actualizarUsuario(usr);
-        return "Perfil actualizado a: " + img;
+        res.redirect("/perfil");
+        return "";
+    });
 
+    post("/foto/portada/", (req, res) -> {
+        String img = guardarImagen("foto", uploadDir, req);
+        Usuario usr = UsuarioServices.getLogUser(req);
+        usr.setFotoPortada(img);
+        UsuarioServices.getInstancia().actualizarUsuario(usr);
+        res.redirect("/perfil");
+        return "";
     });
 
 }
@@ -63,7 +72,7 @@ public void rutas(){
             e.printStackTrace();
         }
 
-        return "<img src='/" + tempFile.getFileName() +"'>";
+        return "/" + tempFile.getFileName().toString();
     }
 
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Comentario {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @Column(columnDefinition = "text")
     private String comentario;
@@ -25,11 +25,11 @@ public class Comentario {
 
     public Comentario(){};
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

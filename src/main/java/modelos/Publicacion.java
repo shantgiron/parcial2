@@ -10,8 +10,8 @@ import java.util.Set;
 public class Publicacion {
 
     @Id
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
     @Column(columnDefinition = "text")
     //  private String imagen; revisa esto sarah.. no toy segura
@@ -21,8 +21,9 @@ public class Publicacion {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Usuario usuario;
+
 
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -30,7 +31,7 @@ public class Publicacion {
 
     private String img;
 
-    public Publicacion(long id, String descripcion, Date fecha, Set<Usuario> etiquetas, Usuario usuario) {
+    public Publicacion(Long id, String descripcion, Date fecha, Set<Usuario> etiquetas, Usuario usuario) {
         this.id = id;
         this.descripcion = descripcion;
         this.fecha = fecha;
@@ -43,11 +44,11 @@ public class Publicacion {
     public Publicacion() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

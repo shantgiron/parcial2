@@ -136,7 +136,7 @@
 			<div class="control-block">
 				<div class="author-page author vcard inline-items">
 					<div class="author-thumb">
-						<img alt="author" src="img/author-page.jpg" class="avatar">
+						<img alt="author"  th:src="${usuario.fotoPerfil}" width="40" height="40"   class="avatar">
 						<span class="icon-status online"></span>
 					</div>
 					<a href="perfilUsuario.html" class="author-name fn">
@@ -332,7 +332,7 @@
 	<li class="nav-item">
 		<a class="nav-link" data-toggle="tab" href="#profile-author" role="tab">
 			<div class="author-thumb">
-				<img alt="author" src="img/author-page.jpg" class="avatar">
+				<img alt="author"  th:src="${usuario.fotoPerfil}" width="40" height="40"   class="avatar">
 				<span class="icon-status online"></span>
 			</div>
 		</a>
@@ -391,7 +391,7 @@
 				<div class="profile-section">
 					<div class="top-header-author">
 						<a href="#" class="author-thumb">
-							<img src="img/author-main1.jpg" alt="author">
+							<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 						</a>
 						<div class="author-content">
 							<a href="#" class="h4 author-name">James Spiegel</a>
@@ -495,7 +495,7 @@
 				<article class="hentry post">
 
 					<div class="post__author author vcard inline-items">
-						<img src="img/author-page.jpg" alt="author">
+						<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 
 						<div class="author-date">
 							<a class="h6 post__author-name fn" href="#">James Spiegel</a>
@@ -580,7 +580,7 @@
 				<article class="hentry post video">
 
 					<div class="post__author author vcard inline-items">
-						<img src="img/author-page.jpg" alt="author">
+						<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 
 						<div class="author-date">
 							<a class="h6 post__author-name fn" href="#">James Spiegel</a> shared a <a href="#">link</a>
@@ -811,7 +811,7 @@
 				<form class="comment-form inline-items">
 
 					<div class="post__author author vcard inline-items">
-						<img src="img/author-page.jpg" alt="author">
+						<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 
 						<div class="form-group with-icon-right ">
 							<textarea class="form-control" placeholder=""></textarea>
@@ -862,7 +862,7 @@
 					<div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
 						<form>
 							<div class="author-thumb">
-								<img src="img/author-page.jpg" alt="author">
+								<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 							</div>
 							<div class="form-group with-icon label-floating is-empty">
 								<label class="control-label">Share what you are thinking here...</label>
@@ -890,7 +890,7 @@
 					<div class="tab-pane" id="profile-1" role="tabpanel" aria-expanded="true">
 						<form>
 							<div class="author-thumb">
-								<img src="img/author-page.jpg" alt="author">
+								<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 							</div>
 							<div class="form-group with-icon label-floating is-empty">
 								<label class="control-label">Share what you are thinking here...</label>
@@ -918,7 +918,7 @@
 					<div class="tab-pane" id="blog" role="tabpanel" aria-expanded="true">
 						<form>
 							<div class="author-thumb">
-								<img src="img/author-page.jpg" alt="author">
+								<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 							</div>
 							<div class="form-group with-icon label-floating is-empty">
 								<label class="control-label">Share what you are thinking here...</label>
@@ -950,7 +950,7 @@
 			<article class="hentry post video">
 
 				<div class="post__author author vcard inline-items">
-					<img src="img/author-page.jpg" alt="author">
+					<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 
 					<div class="author-date">
 						<a class="h6 post__author-name fn" href="#">James Spiegel </a> shared a <a href="#">link</a>
@@ -1813,7 +1813,7 @@
 
 					<li>
 						<div class="author-thumb">
-							<img src="img/author-page.jpg" alt="author" class="mCS_img_loaded">
+							<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author" class="mCS_img_loaded">
 						</div>
 						<div class="notification-event">
 							<span class="chat-message-item">Don’t worry Mathilda!</span>

@@ -6,6 +6,7 @@ import modelos.Usuario;
 import services.PublicacionServices;
 import services.UsuarioServices;
 import spark.ModelAndView;
+import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import java.text.SimpleDateFormat;
@@ -59,10 +60,25 @@ public class ManejoRutasShant {
                     request.session().invalidate();
                     response.redirect("/inicio");
                 } else {
-                    request.session(true);
-                    request.session().attribute("usuario", user);
+                    try {
+                        if("on".equalsIgnoreCase(request.queryParams("recordar"))){
+                            response.cookie("/", "usuario", Long.toString(user.getId()), 7*24*60*60*1000, false);
+                            response.cookie("/", "pass", user.getPassword(), 7*24*60*60*1000, false);
+                        }else{
+                            response.cookie("/", "usuario", Long.toString(user.getId()), 0, false);
+                            response.cookie("/", "pass", Long.toString(user.getId()), 0, false);
+                        }
+                    }catch (Exception e){  }
+
+                    Session session = request.session(true);
+                    session.attribute("usuario", user);
                     response.redirect("/index");
                 }
+
+
+
+
+
             } else {
                 Usuario usuario = new Usuario();
 
@@ -78,6 +94,8 @@ public class ManejoRutasShant {
                 usuario.setPassword(contrasena);
                 usuario.setFecha_nacimiento(new SimpleDateFormat("mm/dd/yyyy").parse(cumpleanos));
 
+                usuario.setFotoPerfil("/img/badge3.png");
+
                 new UsuarioServices().crearUsuario(usuario);
 
                 response.redirect("/inicio?register=true");
@@ -88,9 +106,9 @@ public class ManejoRutasShant {
 
         get("/index", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
-            modelo.put("usuario", request.session().attribute("usuario"));
             modelo.put("publicaciones", new PublicacionServices().listaPublicacion());
-
+            Usuario u = UsuarioServices.getLogUser(request);
+            modelo.put("usuario", u);
             return renderThymeleaf(modelo,"/index");
         });
 
@@ -100,11 +118,12 @@ public class ManejoRutasShant {
             Publicacion publicacion = new Publicacion();
             //publicacion.setAutor(request.attribute("usuario"));
             publicacion.setDescripcion(descripcion);
-            publicacion.setUsuario(request.session().attribute("usuario"));
+            System.out.println(UsuarioServices.getLogUser(request).getId());
+           // publicacion.setUsuario(UsuarioServices.getLogUser(request));
             publicacion.setFecha(new Date());
             publicacion.setImg("");
 
-            new PublicacionServices().crear(publicacion);
+            PublicacionServices.getInstancia().crear(publicacion);
 
             response.redirect("/index");
 
@@ -113,6 +132,7 @@ public class ManejoRutasShant {
 
         get("/perfil", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
+            modelo.put("usuario", UsuarioServices.getLogUser(request));
 
             return renderThymeleaf(modelo,"/perfilUsuario");
         });

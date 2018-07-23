@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
 	<title>Profile Page</title>
@@ -193,7 +193,7 @@
 
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
-					<img alt="author" src="img/author-page.jpg" class="avatar">
+					<img alt="author"  th:src="${usuario.fotoPerfil}" width="90" height="90" class="avatar">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -631,28 +631,47 @@
 							<div class="col col-lg-5 col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										<a href="perfilUsuario.html" class="active">Timeline</a>
+										<a href="/index" class="active">Timeline</a>
 									</li>
 									<li>
-										<a href="06-ProfilePage.html">Friends</a>
+										<a href="06-ProfilePage.html">Amigos</a>
 									</li>
 								</ul>
 							</div>
 							<div class="col col-lg-5 ml-auto col-md-5 col-sm-12 col-12">
 								<ul class="profile-menu">
 									<li>
-										<a href="07-ProfilePage-Photos.html">Photos</a>
+										<a href="07-ProfilePage-Photos.html">Fotos</a>
 									</li>
 
 								</ul>
 							</div>
 						</div>
+
+						<div class="control-block-button">
+							<div class="btn btn-control bg-primary more">
+								<svg class="olymp-settings-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-settings-icon"></use></svg>
+
+								<ul class="more-dropdown more-with-triangle triangle-bottom-right">
+									<li>
+										<a href="#" data-toggle="modal" data-target="#update-profile-photo">Actualizar foto de perfil</a>
+									</li>
+									<li>
+										<a href="#" data-toggle="modal" data-target="#update-header-photo">Actualizar foto de portada</a>
+									</li>
+									<li>
+										<a href="29-YourAccount-AccountSettings.html">Configurar cuenta</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
 						<div class="top-header-author">
 							<a href="perfilUsuario.html" class="author-thumb">
-								<img src="img/author-main1.jpg" alt="author">
+								<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 							</a>
 							<div class="author-content">
-								<a href="perfilUsuario.html" class="h4 author-name">James Spiegel</a>
+								<a href="perfilUsuario" class="h4 author-name" th:text="${usuario.nombre}">  </a>
 								<div class="country">San Francisco, CA</div>
 							</div>
 						</div>
@@ -681,7 +700,7 @@
 					<article class="hentry post">
 					
 							<div class="post__author author vcard inline-items">
-								<img src="img/author-page.jpg" alt="author">
+								<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 					
 								<div class="author-date">
 									<a class="h6 post__author-name fn" href="perfilUsuario.html">James Spiegel</a>
@@ -863,6 +882,33 @@
 
 <!-- Window-popup Update Header Photo -->
 
+<div class="modal fade" id="update-profile-photo" tabindex="-1" role="dialog" aria-labelledby="update-header-photo" aria-hidden="true">
+	<div class="modal-dialog window-popup update-header-photo" role="document">
+		<div class="modal-content">
+			<a href="#" class="close icon-close" data-dismiss="modal" aria-label="Close">
+				<svg class="olymp-close-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-close-icon"></use></svg>
+			</a>
+
+			<div class="modal-header">
+				<h6 class="title">Seleccione nueva imagen</h6>
+			</div>
+
+			<div class="modal-body">
+				<a href="#" class="upload-photo-item">
+					<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
+					<h6>Upload Photo</h6>
+					<form method='post' enctype='multipart/form-data' action="/foto/perfil/">
+						<input type='file' name='foto' accept='.png'>
+						<button>Actualizar</button>
+					</form>
+				</a>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal fade" id="update-header-photo" tabindex="-1" role="dialog" aria-labelledby="update-header-photo" aria-hidden="true">
 	<div class="modal-dialog window-popup update-header-photo" role="document">
 		<div class="modal-content">
@@ -871,28 +917,24 @@
 			</a>
 
 			<div class="modal-header">
-				<h6 class="title">Update Header Photo</h6>
+				<h6 class="title">Seleccione nueva imagen</h6>
 			</div>
 
 			<div class="modal-body">
 				<a href="#" class="upload-photo-item">
 					<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
-
 					<h6>Upload Photo</h6>
-					<span>Browse your computer.</span>
+					<form method='post' enctype='multipart/form-data' action="/foto/portada/">
+						<input type='file' name='foto' accept='.png'>
+						<button>Actualizar</button>
+					</form>
 				</a>
 
-				<a href="#" class="upload-photo-item" data-toggle="modal" data-target="#choose-from-my-photo">
-
-					<svg class="olymp-photos-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-photos-icon"></use></svg>
-
-					<h6>Choose from My Photos</h6>
-					<span>Choose from your uploaded photos</span>
-				</a>
 			</div>
 		</div>
 	</div>
 </div>
+
 
 
 <!-- ... end Window-popup Update Header Photo -->
@@ -1407,7 +1449,7 @@
 
 					<li>
 						<div class="author-thumb">
-							<img src="img/author-page.jpg" alt="author" class="mCS_img_loaded">
+							<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author" class="mCS_img_loaded">
 						</div>
 						<div class="notification-event">
 							<span class="chat-message-item">Don’t worry Mathilda!</span>

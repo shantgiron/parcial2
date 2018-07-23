@@ -292,7 +292,9 @@ Description: "HTML-template"
     line-height: 19px;
     top: -12px;
     right: -9px; }
-  .control-icon .more-dropdown {
+
+
+.control-icon .more-dropdown {
     width: 380px;
     top: 35px;
     right: -180px;

@@ -61,7 +61,7 @@
 
 			<div class="author-page author vcard inline-items more">
 				<div class="author-thumb">
-					<img alt="author" src="img/author-page.jpg" class="avatar">
+					<img alt="author"  th:src="${usuario.fotoPerfil}" width="40" height="40" class="author-thumb">
 					<span class="icon-status online"></span>
 					<div class="more-dropdown more-with-triangle">
 						<div class="mCustomScrollbar" data-mcs-theme="dark">
@@ -184,7 +184,7 @@
 						<div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
 							<form action="/index" method="post">
 								<div class="author-thumb">
-									<img src="img/author-page.jpg" alt="author">
+									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 								</div>
 								<div class="form-group with-icon label-floating is-empty">
 									<label class="control-label">Comparte lo que estas pensando...</label>
@@ -207,7 +207,7 @@
 						<div class="tab-pane" id="profile-1" role="tabpanel" aria-expanded="true">
 							<form>
 								<div class="author-thumb">
-									<img src="img/author-page.jpg" alt="author">
+									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 								</div>
 								<div class="form-group with-icon label-floating is-empty">
 									<label class="control-label">Comparte lo que estas pensando...</label>
@@ -231,7 +231,7 @@
 						<div class="tab-pane" id="blog" role="tabpanel" aria-expanded="true">
 							<form>
 								<div class="author-thumb">
-									<img src="img/author-page.jpg" alt="author">
+									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 								</div>
 								<div class="form-group with-icon label-floating is-empty">
 									<label class="control-label">Share what you are thinking here...</label>
@@ -579,7 +579,7 @@
 
 					<li>
 						<div class="author-thumb">
-							<img src="img/author-page.jpg" alt="author" class="mCS_img_loaded">
+							<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author" class="mCS_img_loaded">
 						</div>
 						<div class="notification-event">
 							<span class="chat-message-item">Don’t worry Mathilda!</span>

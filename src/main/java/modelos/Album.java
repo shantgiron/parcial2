@@ -10,7 +10,7 @@ import java.util.Set;
 public class Album {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
     @OneToMany
     private Set<Publicacion> fotos;
@@ -21,11 +21,11 @@ public class Album {
 
     public Album() { }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

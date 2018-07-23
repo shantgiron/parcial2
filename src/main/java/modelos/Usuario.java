@@ -11,9 +11,8 @@ import java.util.Set;
 public class Usuario{
 
     @Id
-    @GeneratedValue
-    private long id;
-
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
     private String username;
     private String nombre;
@@ -22,8 +21,21 @@ public class Usuario{
     private String correo;
     private String lugar_nacimiento;
     private String ciudad_residencia;
+    private String fotoPerfil;
 
-    public void setId(long id) {
+    public String getFotoPortada() {
+        return fotoPortada;
+    }
+
+    public void setFotoPortada(String fotoPortada) {
+        this.fotoPortada = fotoPortada;
+    }
+
+    private String fotoPortada;
+
+
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,7 +47,7 @@ public class Usuario{
         this.fotoPerfil = fotoPerfil;
     }
 
-    private String fotoPerfil;
+
 
 
     @Column(columnDefinition =  "boolean default false")
@@ -54,9 +66,6 @@ public class Usuario{
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
