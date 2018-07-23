@@ -29,6 +29,7 @@ public class ManejoRutasShant {
             usuario.setLugar_nacimiento("Santiago");
             usuario.setCiudad_residencia("Santiago");
             usuario.setFotoPerfil("/img/badge4.png");
+            usuario.setFotoPortada("img/top-header1.jpg");
 
             new UsuarioServices().crearUsuario(usuario);
         }
@@ -96,6 +97,7 @@ public class ManejoRutasShant {
                 usuario.setFecha_nacimiento(new SimpleDateFormat("mm/dd/yyyy").parse(cumpleanos));
 
                 usuario.setFotoPerfil("/img/badge3.png");
+                usuario.setFotoPortada("img/top-header1.jpg");
 
                 new UsuarioServices().crearUsuario(usuario);
 

@@ -22,6 +22,7 @@ public class Usuario{
     private String lugar_nacimiento;
     private String ciudad_residencia;
     private String fotoPerfil;
+    private String fotoPortada;
 
     public String getFotoPortada() {
         return fotoPortada;
@@ -30,10 +31,6 @@ public class Usuario{
     public void setFotoPortada(String fotoPortada) {
         this.fotoPortada = fotoPortada;
     }
-
-    private String fotoPortada;
-
-
 
     public void setId(Long id) {
         this.id = id;
@@ -46,8 +43,6 @@ public class Usuario{
     public void setFotoPerfil(String fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
-
-
 
 
     @Column(columnDefinition =  "boolean default false")
