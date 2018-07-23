@@ -21,7 +21,7 @@ public class Publicacion {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuario;
 
 

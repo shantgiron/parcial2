@@ -20,14 +20,15 @@ import static spark.Spark.*;
 public class ManejoRutasShant {
     public ManejoRutasShant() {
         //Usuario admin por defecto
-        if (new UsuarioServices().getUsuarioByEmail("shantgiron@gmail.com") == null) {
+        if (new UsuarioServices().getUsuarioByEmail("admin@admin.com") == null) {
             Usuario usuario = new Usuario();
             usuario.setPassword("admin");
             usuario.setNombre("Shantall");
             usuario.setApellido("Giron");
-            usuario.setCorreo("shantgiron@gmail.com");
+            usuario.setCorreo("admin@admin.com");
             usuario.setLugar_nacimiento("Santiago");
             usuario.setCiudad_residencia("Santiago");
+            usuario.setFotoPerfil("/img/badge4.png");
 
             new UsuarioServices().crearUsuario(usuario);
         }
@@ -118,7 +119,7 @@ public class ManejoRutasShant {
             Publicacion publicacion = new Publicacion();
             //publicacion.setAutor(request.attribute("usuario"));
             publicacion.setDescripcion(descripcion);
-            System.out.println(UsuarioServices.getLogUser(request).getId());
+          //  System.out.println(UsuarioServices.getLogUser(request).getId());
             publicacion.setUsuario(UsuarioServices.getLogUser(request));
             publicacion.setFecha(new Date());
             publicacion.setImg("");
@@ -127,7 +128,7 @@ public class ManejoRutasShant {
 
             response.redirect("/index");
 
-            return null;
+            return "";
         });
 
         get("/perfil", (request, response) -> {

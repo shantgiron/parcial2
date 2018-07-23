@@ -187,7 +187,7 @@
 									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 								</div>
 								<div class="form-group with-icon label-floating is-empty">
-									<label class="control-label">Comparte lo que estas pensando...</label>
+									<label class="control-label"> Comparte lo que estas pensando...</label>
 									<textarea class="form-control" placeholder="" name="descripcion"></textarea>
 								</div>
 
@@ -203,31 +203,7 @@
 				
 							</form>
 						</div>
-				
-						<div class="tab-pane" id="profile-1" role="tabpanel" aria-expanded="true">
-							<form>
-								<div class="author-thumb">
-									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
-								</div>
-								<div class="form-group with-icon label-floating is-empty">
-									<label class="control-label">Comparte lo que estas pensando...</label>
-									<textarea class="form-control" placeholder=""  ></textarea>
-								</div>
-								<div class="add-options-message">
-									<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="ADD PHOTOS">
-										<svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
-									</a>
-									<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="TAG YOUR FRIENDS">
-										<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
-									</a>
-				
-									<button class="btn btn-primary btn-md-2">Publicar estado</button>
-				
-								</div>
-				
-							</form>
-						</div>
-				
+
 						<div class="tab-pane" id="blog" role="tabpanel" aria-expanded="true">
 							<form>
 								<div class="author-thumb">
@@ -266,9 +242,9 @@
 					<div class="ui-block">
 						<article class="hentry post video">
 							<div class="post__author author vcard inline-items">
-								<img src="img/avatar7-sm.jpg" alt="author">
+								<img th:src="${publicacion.usuario.fotoPerfil}" alt="author" width="40" height="40">
 								<div class="author-date">
-									<a class="h6 post__author-name fn">Marina Valentine </a>
+									<a class="h6 post__author-name fn"  th:text="${publicacion.usuario.nombre} + ' ' + ${publicacion.usuario.apellido}"> Marina Valentine </a>
 									<div class="post__date" th:text="${publicacion.fecha}">
 										<time class="published" datetime="2004-07-24T18:18">
 											March 4 at 2:05pm
@@ -293,7 +269,7 @@
 									</ul>
 								</div>
 							</div>
-							<p  th:text="${ #strings.abbreviate(publicacion.descripcion,200)}">Hey Cindi, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+							<p  th:text="${ #strings.abbreviate(publicacion.descripcion,200)}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
 							<div class="post-additional-info inline-items">
 								<a href="#" class="post-add-icon inline-items">
 									<svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
