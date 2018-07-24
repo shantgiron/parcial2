@@ -9,7 +9,9 @@ import spark.ModelAndView;
 import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import javax.servlet.MultipartConfigElement;
 import java.io.File;
+import java.net.PortUnreachableException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -123,17 +125,31 @@ public class ManejoRutasShant {
         });
 
         post("/index", (request, response) -> {
+            
+            //super importante, para leer los campos ya se se codifican diferente gracias a la imagen
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
             String descripcion = request.queryParams("descripcion");
 
+            System.out.println("Se describe: " + descripcion);
+
             Publicacion publicacion = new Publicacion();
-            //publicacion.setAutor(request.attribute("usuario"));
+
             publicacion.setDescripcion(descripcion);
-          //  System.out.println(UsuarioServices.getLogUser(request).getId());
             publicacion.setUsuario(UsuarioServices.getLogUser(request));
             publicacion.setFecha(new Date());
-            publicacion.setImg("");
+
+            String img = RutasImagen.guardarImagen("foto", uploadDir, request);
+
+            publicacion.setImg(img);
+
+            publicacion.setMuro_de(UsuarioServices.getLogUser(request).getId());
+
+            if(img != "-1") publicacion.setNaturaleza("FOTO");
+
 
             PublicacionServices.getInstancia().crear(publicacion);
+
 
             response.redirect("/index");
 

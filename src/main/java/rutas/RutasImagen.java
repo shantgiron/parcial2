@@ -59,17 +59,23 @@ public void rutas(){
     }
 
 
-    public static String guardarImagen(String campo, File uploadDir,  Request req) throws IOException {
+    public static String guardarImagen(String campo, File uploadDir,  Request req) throws IOException, ServletException {
 
         Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
 
         req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
 
-
         try (InputStream input = req.raw().getPart(campo).getInputStream()) {
+
+            System.out.println(req.raw().getPart(campo).getSubmittedFileName());
+
+            if(req.raw().getPart(campo).getSubmittedFileName().isEmpty()){
+                return "-1";
+            }
             Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
         } catch (ServletException e) {
             e.printStackTrace();
+            return "-1";
         }
 
         return "/" + tempFile.getFileName().toString();

@@ -29,4 +29,10 @@ dependencies {
 
     compile 'javax.websocket:javax.websocket-api:1.0'
     compile 'org.eclipse.jetty.websocket:websocket-client'
+
+    // https://mvnrepository.com/artifact/javazoom/jlayer
+    //para formularios con imagenes
+    compile group: 'javazoom', name: 'jlayer', version: '1.0.1'
+
+
 }

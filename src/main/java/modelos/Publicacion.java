@@ -32,6 +32,16 @@ public class Publicacion {
 
     private String img;
 
+    public void setNaturaleza(String naturaleza) {
+        this.naturaleza = naturaleza;
+    }
+
+    public String getNaturaleza() {
+        return naturaleza;
+    }
+
+    private String naturaleza = "PUBLICACION";
+
     public Publicacion(Long id, String descripcion, Date fecha, Set<Usuario> etiquetas, Usuario usuario) {
         this.id = id;
         this.descripcion = descripcion;

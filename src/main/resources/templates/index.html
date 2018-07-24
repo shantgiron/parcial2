@@ -125,14 +125,14 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
-							<form action="/index" method="post">
+							<form action="/index" method="post"  enctype='multipart/form-data'>
 								<div class="author-thumb">
 									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 								</div>
 								<div class="form-group with-icon label-floating is-empty">
 									<label class="control-label"> Comparte lo que estas pensando...</label>
 									<textarea class="form-control" placeholder="" name="descripcion" required></textarea>
-									<input type='file' name='foto' accept='.png'>
+									<input type='file' name="foto" accept='.png'>
 								</div>
 
 								<div class="add-options-message">
@@ -213,7 +213,27 @@
 									</ul>
 								</div>
 							</div>
-							<p  th:text="${ #strings.abbreviate(publicacion.descripcion,200)}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+
+							<div  th:if="${publicacion.naturaleza} == 'PUBLICACION'">
+								<p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+							</div>
+
+							<div  th:if="${publicacion.naturaleza} == 'FOTO'">
+								<h6>Ha publicado una imagen:</h6>
+								<div class="post-thumb">
+									<img th:src="${publicacion.img}" width="400" height="300" alt="photo">
+								</div>
+								<p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+							</div>
+
+							<div  th:if="${publicacion.naturaleza} == 'ALBUM'">
+								<h6>Ha publicado un album:</h6>
+								<div class="post-thumb">
+									<img th:src="${publicacion.img}" width="400" height="300" alt="photo">
+								</div>
+								<p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+							</div>
+
 							<div class="post-additional-info inline-items">
 								<a href="#" class="post-add-icon inline-items">
 									<svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
