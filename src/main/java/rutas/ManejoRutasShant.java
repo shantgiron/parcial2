@@ -125,13 +125,11 @@ public class ManejoRutasShant {
         });
 
         post("/index", (request, response) -> {
-            
+
             //super importante, para leer los campos ya se se codifican diferente gracias a la imagen
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
 
             String descripcion = request.queryParams("descripcion");
-
-            System.out.println("Se describe: " + descripcion);
 
             Publicacion publicacion = new Publicacion();
 
