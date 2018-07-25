@@ -181,73 +181,8 @@
 				
 				<!-- ... end News Feed Form  -->			</div>
 
-			<div id="newsfeed-items-grid">
-				<div th:each="publicacion : ${publicaciones}">
-					<div class="ui-block">
-						<article class="hentry post video">
-							<div class="post__author author vcard inline-items">
-								<img th:src="${publicacion.usuario.fotoPerfil}" alt="author" width="40" height="40">
-								<div class="author-date">
-									<a class="h6 post__author-name fn"  th:text="${publicacion.usuario.nombre} + ' ' + ${publicacion.usuario.apellido}"> Marina Valentine </a>
-									<div class="post__date" th:text="${publicacion.fecha}">
-										<time class="published" datetime="2004-07-24T18:18">
-											March 4 at 2:05pm
-										</time>
-									</div>
-								</div>
-
-								<div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
-									<ul class="more-dropdown">
-										<li>
-											<a href="#">Edit Post</a>
-										</li>
-										<li>
-											<a href="#">Delete Post</a>
-										</li>
-										<li>
-											<a href="#">Turn Off Notifications</a>
-										</li>
-										<li>
-											<a href="#">Select as Featured</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-
-							<div  th:if="${publicacion.naturaleza} == 'PUBLICACION'">
-								<p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
-							</div>
-
-							<div  th:if="${publicacion.naturaleza} == 'FOTO'">
-								<h6>Ha publicado una imagen:</h6>
-								<div class="post-thumb">
-									<img th:src="${publicacion.img}" alt="photo">
-								</div>
-								<p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
-							</div>
-
-							<div  th:if="${publicacion.naturaleza} == 'ALBUM'">
-								<h6>Ha publicado un album:</h6>
-								<div class="post-thumb">
-									<img th:src="${publicacion.img}" alt="photo">
-								</div>
-								<p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
-							</div>
-
-							<form class="comment-form inline-items" action="/comentar" method="post" >
-								<input type="hidden" name="publicacionid" th:value="${publicacion.id}">
-								<div class="post__author author vcard inline-items">
-									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
-									<div class="form-group with-icon-right ">
-										<textarea class="form-control" placeholder="Deja tu opinion.." name="comentario" required></textarea>
-									</div>
-								</div>
-								<button class="btn btn-md-2 btn-primary" type="submit">Comentar</button>
-								</form>
-						</article>
-					</div>
-				</div>
-			</div>
+			<div th:replace="capas/publicaciones">
+            </div>
 		</main>
         <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
             <div class="ui-block">

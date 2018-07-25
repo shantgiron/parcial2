@@ -162,7 +162,9 @@ public class ManejoRutasShant {
 
         get("/perfil", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
-            modelo.put("usuario", UsuarioServices.getLogUser(request));
+            Usuario user = UsuarioServices.getLogUser(request);
+            modelo.put("usuario", user);
+            modelo.put("publicaciones", PublicacionServices.getInstancia().listaPublicacionByUduarioID(user.getId()));
 
             return renderThymeleaf(modelo,"/perfilUsuario");
         });

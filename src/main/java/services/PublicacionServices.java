@@ -37,6 +37,15 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         return lista;
     }
 
+    public List<Publicacion> listaPublicacionByUduarioID(Long usuarioid) {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("select a from Publicacion a WHERE muro_de =:usuarioid order by a.id desc");
+        query.setParameter("usuarioid", usuarioid);
+        List<Publicacion> lista = query.getResultList();
+        em.close();
+        return lista;
+    }
+
     public List<Publicacion> listaPublicacion(int pagina, int sz) {
         pagina = max(pagina,1);
         EntityManager em = getEntityManager();

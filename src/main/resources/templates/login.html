@@ -45,7 +45,7 @@
 			<div class="landing-content">
 				<h1> Bienvenido a la red social con Spark</h1>
 				<p>Somos una red social hecha con Spark. Sientete libre, comparte tus publicaciones, etiqueta a tus amigos, deja comentarios y muchas cosas mas!!</p>
-				<a href="#registro" class="btn btn-md btn-border c-white">Registrarse!</a>
+				<a href="#registro" class="btn btn-md btn-border c-white" data-toggle="tab" role="tab">Registrarse!</a>
 			</div>
 		</div>
 
@@ -53,11 +53,11 @@
 
 			<!-- Login-Registration Form  -->
 
-			<div class="registration-login-form" id="registro">
+			<div class="registration-login-form">
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active" data-toggle="tab" href="#home" role="tab">
+						<a class="nav-link active" data-toggle="tab" href="#registro" role="tab">
 							<svg class="olymp-login-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-login-icon"></use></svg>
 						</a>
 					</li>
@@ -70,7 +70,7 @@
 
 				<!-- Tab panes -->
 				<div class="tab-content">
-					<div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
+					<div class="tab-pane active" id="registro" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Registrarse</div>
 						<div class="alert alert-success m-1" th:text="${mensaje}"></div>
 						<form method="post" action="/login" class="content" name="registrationForm" >
@@ -115,7 +115,6 @@
 							</div>
 						</form>
 					</div>
-
 					<div class="tab-pane" id="profile" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Inicia sesion en tu cuenta</div>
 						<form action="/login" method="post" class="content">
@@ -145,7 +144,7 @@
 									<button type="submit" class="btn btn-lg btn-primary full-width">Iniciar Sesion</button>
 
 
-									<p>No tienes una cuenta? <a href="#">Registrate!</a> Es muy simple, crea tu cuenta y disfruta de nuestra red social</p>
+									<p>No tienes una cuenta? <a href="#registro">Registrate!</a> Es muy simple, crea tu cuenta y disfruta de nuestra red social</p>
 								</div>
 							</div>
 						</form>
