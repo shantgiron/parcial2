@@ -228,6 +228,19 @@ public class ManejoRutasShant {
 
             return usuario;
         }*/
+        
+        //Por si no ponen inicio
+        
+         get("",  (request, response) -> {
+            response.redirect("/inicio");
+            return "";
+        });
+
+        get("/",  (request, response) -> {
+            response.redirect("/inicio");
+            return "";
+        });
+
     }
 
     // Declaración para simplificar el uso del motor de template Thymeleaf.
