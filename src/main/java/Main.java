@@ -58,11 +58,11 @@ public class Main {
         //Las rutas
         new RutasImagen().rutas();
         new ManejoRutasGenerales().rutas();
-        new ManejoRutasShant();
+        new ManejoRutasShant().rutas();
 
 
         //Aplicando los filtros
-//        new Filtros().aplicarFiltros();
+       new Filtros().aplicarFiltros();
 
 
     }

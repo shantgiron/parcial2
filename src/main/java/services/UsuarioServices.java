@@ -98,7 +98,7 @@ public class UsuarioServices extends GestionDb<Usuario> {
     }
 
     public static Usuario getLogUser(Request request){
-        Usuario usuario = new Usuario();
+        Usuario usuario = null;
         Session session = request.session(true);
         if(request.cookie("usuario") != null){
             UsuarioServices us = new UsuarioServices();

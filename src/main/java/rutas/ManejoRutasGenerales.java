@@ -1,6 +1,7 @@
 package rutas;
 
 import modelos.Usuario;
+import services.ComentarioServices;
 import services.UsuarioServices;
 import spark.ModelAndView;
 import spark.Request;
@@ -25,10 +26,27 @@ public class ManejoRutasGenerales {
 
     public void rutas(){
 
-    //ruta para el conteo de los likes
        get("/", (request, response) -> {
-            return "Hola mundo";
+            response.redirect("/inicio");
+            return "";
         });
+
+        get("", (request, response) -> {
+            response.redirect("/inicio");
+            return "";
+        });
+
+
+        post("/comentar", (request, response) -> {
+            ComentarioServices cs = new ComentarioServices();
+            Session session = request.session(true);
+            long publicacionid = Long.parseLong(request.queryParams("publicacionid"));
+            long usuarioid = ((Usuario)session.attribute("usuario")).getId();
+
+            cs.crearComentario(request.queryParams("comentario"), usuarioid, publicacionid);
+            return "";
+        });
+
     }
 
     private static Object procesarParametros(Request request, Response response){

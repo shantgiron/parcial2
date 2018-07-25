@@ -21,7 +21,7 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class ManejoRutasShant {
-    public ManejoRutasShant() {
+    public void rutas() {
         File uploadDir = new File("fotos");
         uploadDir.mkdir();
 

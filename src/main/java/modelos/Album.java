@@ -1,9 +1,6 @@
 package modelos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -12,7 +9,7 @@ public class Album {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Publicacion> fotos;
 
     public Album(Set<Publicacion> fotos) {

@@ -58,11 +58,6 @@ public class PublicacionServices extends GestionDb<Publicacion>{
         return cant;
     }
 
-   /* public Publicacion getPublicacion(long id) {
-        Publicacion publicacion = find(id);
-        publicacion.setComentarios( new ComentarioServices().getComentarioByArticuloID(id)); //debes crear la clase de comentario y servicio
-        return publicacion;
-    }*/
 
     public boolean crearPublicacion(String descripcion, long usuarioid, String tags){
         Publicacion publicacion = new Publicacion();
