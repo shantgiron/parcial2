@@ -42,7 +42,7 @@ public class ManejoRutasShant {
             new UsuarioServices().crearUsuario(usuario);
         }
 
-        get("/inicio", (request, response) -> {
+        get("/login", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
 
             String mensaje = "";
@@ -54,10 +54,10 @@ public class ManejoRutasShant {
 
             modelo.put("mensaje", mensaje);
 
-            return renderThymeleaf(modelo,"/inicio");
+            return renderThymeleaf(modelo,"/login");
         });
 
-        post("/inicio", (request, response) -> {
+        post("/login", (request, response) -> {
             boolean iniciarsesion = Boolean.parseBoolean(request.queryParams("iniciarsesion"));
 
             if (iniciarsesion) {
@@ -68,7 +68,7 @@ public class ManejoRutasShant {
 
                 if (user == null) {
                     request.session().invalidate();
-                    response.redirect("/inicio");
+                    response.redirect("/login");
                 } else {
                     try {
                         if("on".equalsIgnoreCase(request.queryParams("recordar"))){
@@ -110,7 +110,13 @@ public class ManejoRutasShant {
 
                 new UsuarioServices().crearUsuario(usuario);
 
-                response.redirect("/inicio?register=true");
+                Usuario user =  UsuarioServices.getInstancia().getUsuarioByEmail(correo);
+
+                Session session = request.session(true);
+                session.attribute("usuario", user);
+                response.redirect("/inicio");
+
+                response.redirect("/login?register=true");
             }
 
             return null;
@@ -124,7 +130,7 @@ public class ManejoRutasShant {
             return renderThymeleaf(modelo,"/index");
         });
 
-        post("/index", (request, response) -> {
+        post("/inicio", (request, response) -> {
 
             //super importante, para leer los campos ya se se codifican diferente gracias a la imagen
             request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
@@ -149,7 +155,7 @@ public class ManejoRutasShant {
             PublicacionServices.getInstancia().crear(publicacion);
 
 
-            response.redirect("/index");
+            response.redirect("/inicio");
 
             return "";
         });
@@ -163,7 +169,7 @@ public class ManejoRutasShant {
 
         get("/cerrarsesion", (request, response) -> {
             request.session().invalidate();
-            response.redirect("/inicio");
+            response.redirect("/login");
             return null;
         });
         
@@ -173,7 +179,7 @@ public class ManejoRutasShant {
             int publicacionid = Integer.parseInt(request.queryParams("publicacionid"));
             int usuarioid = (int)( (Usuario)session.attribute("usuario")).getId();
             as.borrarPublicacion(publicacionid, usuarioid);
-            response.redirect("/index");
+            response.redirect("/inicio");
             return "";
         });
 

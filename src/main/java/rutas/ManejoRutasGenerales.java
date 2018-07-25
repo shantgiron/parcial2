@@ -27,12 +27,12 @@ public class ManejoRutasGenerales {
     public void rutas(){
 
        get("/", (request, response) -> {
-            response.redirect("/inicio");
+            response.redirect("/login");
             return "";
         });
 
         get("", (request, response) -> {
-            response.redirect("/inicio");
+            response.redirect("/login");
             return "";
         });
 

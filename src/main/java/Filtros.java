@@ -12,16 +12,16 @@ public class Filtros { //para aplicar filtros
             Usuario usuario = request.session(true).attribute("usuario");
             if(usuario == null){
                 //parada del request, enviando un codigo.
-                response.redirect("/inicio");
+                response.redirect("/login");
                 halt(200, "No tiene permisos para acceder..");
             }
         });
 
-        before("/index",(request, response) -> {
+        before("/inicio",(request, response) -> {
             Usuario usuario = UsuarioServices.getLogUser(request);
             if(usuario == null){
                 //parada del request, enviando un codigo.
-                response.redirect("/inicio");
+                response.redirect("/login");
                 halt(200, "No tiene permisos para acceder..");
             }
         });

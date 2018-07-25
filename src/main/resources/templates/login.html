@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+	<title>Red Social con Spark</title>
+
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<!-- Main Font -->
+	<script src="js/webfontloader.min.js"></script>
+
+	<script>
+        WebFont.load({
+            google: {
+                families: ['Roboto:300,400,500,700:latin']
+            }
+        });
+	</script>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-reboot.css">
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="Bootstrap/dist/css/bootstrap-grid.css">
+
+	<!-- Main Styles CSS -->
+	<link rel="stylesheet" type="text/css" href="css/main.min.css">
+	<link rel="stylesheet" type="text/css" href="css/fonts.min.css">
+
+
+
+</head>
+
+<body class="landing-page">
+
+<div class="content-bg-wrap"></div>
+
+<div class="header-spacer--standard"></div>
+
+<div class="container">
+	<div class="row display-flex">
+		<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+			<div class="landing-content">
+				<h1> Bienvenido a la red social con Spark</h1>
+				<p>Somos una red social hecha con Spark. Sientete libre, comparte tus publicaciones, etiqueta a tus amigos, deja comentarios y muchas cosas mas!!</p>
+				<a href="#registro" class="btn btn-md btn-border c-white">Registrarse!</a>
+			</div>
+		</div>
+
+		<div class="col col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12">
+
+			<!-- Login-Registration Form  -->
+
+			<div class="registration-login-form" id="registro">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#home" role="tab">
+							<svg class="olymp-login-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-login-icon"></use></svg>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#profile" role="tab">
+							<svg class="olymp-register-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-register-icon"></use></svg>
+						</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
+						<div class="title h6">Registrarse</div>
+						<div class="alert alert-success m-1" th:text="${mensaje}"></div>
+						<form method="post" action="/login" class="content" name="registrationForm" >
+							<input type="hidden" name="iniciarsesion" value="false">
+							<div class="row">
+								<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group label-floating is-empty">
+										<label class="control-label">Nombre</label>
+										<input class="form-control" placeholder="" name="nombre" type="text" required>
+									</div>
+								</div>
+								<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
+									<div class="form-group label-floating is-empty">
+										<label class="control-label">Apellido</label>
+										<input class="form-control" placeholder="" name="apellido" type="text" required>
+									</div>
+								</div>
+								<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group label-floating is-empty">
+										<label class="control-label">Email</label>
+										<input class="form-control" placeholder="" name="correo" type="email" required>
+									</div>
+									<div class="form-group label-floating is-empty">
+										<label class="control-label">Contraseña</label>
+										<input class="form-control" placeholder="" name="contrasena" type="password" required>
+									</div>
+
+									<div class="form-group date-time-picker label-floating">
+										<label class="control-label">Cumpleaños</label>
+										<input  name="cumpleanos" value="10/24/1984" required>
+										<span class="input-group-addon">
+														<svg class="olymp-calendar-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-calendar-icon"></use></svg>
+													</span>
+									</div>
+
+									<div class="remember">
+
+									</div>
+
+									<button type="submit" class="btn btn-purple btn-lg full-width">Registrarme!</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="tab-pane" id="profile" role="tabpanel" data-mh="log-tab">
+						<div class="title h6">Inicia sesion en tu cuenta</div>
+						<form action="/login" method="post" class="content">
+							<div class="row">
+								<input type="hidden" name="iniciarsesion" value="true">
+								<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+									<div class="form-group label-floating is-empty">
+										<label class="control-label">Correo</label>
+										<input class="form-control" placeholder="" name="correo" type="email" required>
+									</div>
+									<div class="form-group label-floating is-empty">
+										<label class="control-label">Contraseña</label>
+										<input class="form-control" placeholder="" name="contrasena" type="password" required>
+									</div>
+
+									<div class="remember">
+
+										<div class="checkbox">
+											<label>
+												<input name="recordar" type="checkbox">
+												Recordarme
+											</label>
+										</div>
+										<a href="#" class="forgot">Olvide mi contraseña</a>
+									</div>
+
+									<button type="submit" class="btn btn-lg btn-primary full-width">Iniciar Sesion</button>
+
+
+									<p>No tienes una cuenta? <a href="#">Registrate!</a> Es muy simple, crea tu cuenta y disfruta de nuestra red social</p>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- ... end Login-Registration Form  -->		</div>
+	</div>
+</div>
+
+
+<!-- JS Scripts -->
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/jquery.appear.js"></script>
+<script src="js/jquery.mousewheel.js"></script>
+<script src="js/perfect-scrollbar.js"></script>
+<script src="js/jquery.matchHeight.js"></script>
+<script src="js/svgxuse.js"></script>
+<script src="js/imagesloaded.pkgd.js"></script>
+<script src="js/Headroom.js"></script>
+<script src="js/velocity.js"></script>
+<script src="js/ScrollMagic.js"></script>
+<script src="js/jquery.waypoints.js"></script>
+<script src="js/jquery.countTo.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/material.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script src="js/smooth-scroll.js"></script>
+<script src="js/selectize.js"></script>
+<script src="js/swiper.jquery.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/daterangepicker.js"></script>
+<script src="js/simplecalendar.js"></script>
+<script src="js/fullcalendar.js"></script>
+<script src="js/isotope.pkgd.js"></script>
+<script src="js/ajax-pagination.js"></script>
+<script src="js/Chart.js"></script>
+<script src="js/chartjs-plugin-deferred.js"></script>
+<script src="js/circle-progress.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/run-chart.js"></script>
+<script src="js/jquery.magnific-popup.js"></script>
+<script src="js/jquery.gifplayer.js"></script>
+<script src="js/mediaelement-and-player.js"></script>
+<script src="js/mediaelement-playlist-plugin.min.js"></script>
+
+<script src="js/base-init.js"></script>
+<script defer src="fonts/fontawesome-all.js"></script>
+
+<script src="Bootstrap/dist/js/bootstrap.bundle.js"></script>
+
+
+</body>
+</html>

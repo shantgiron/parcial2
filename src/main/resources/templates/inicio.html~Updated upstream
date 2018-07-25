@@ -257,7 +257,7 @@
 					<div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Registrarse</div>
 						<div th:if="${message}" class="alert alert-success m-1" th:text="|${mensaje}|"></div>
-						<form method="post" action="/inicio" class="content">
+						<form method="post" action="/login" class="content">
 							<input type="hidden" name="iniciarsesion" value="false">
 							<div class="row">
 								<div class="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -315,7 +315,7 @@
 
 					<div class="tab-pane" id="profile" role="tabpanel" data-mh="log-tab">
 						<div class="title h6">Inicia sesion en tu cuenta</div>
-						<form action="/inicio" method="post" class="content">
+						<form action="/login" method="post" class="content">
 							<div class="row">
 								<input type="hidden" name="iniciarsesion" value="true">
 								<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
