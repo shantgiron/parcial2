@@ -166,6 +166,60 @@ public class ManejoRutasShant {
             response.redirect("/inicio");
             return null;
         });
+        
+         /*  post("/borrarPublicacion", (request, response) -> {
+            PublicacionServices as = new PublicacionServices();
+            Session session = request.session(true);
+            int publicacionid = Integer.parseInt(request.queryParams("publicacionid"));
+            int usuarioid = (int)( (Usuario)session.attribute("usuario")).getId();
+            as.borrarPublicacion(publicacionid, usuarioid);
+            response.redirect("/index");
+            return "";
+        });
+
+        get("/editarPublicacion", (request, response)->{
+            int id = Integer.parseInt(request.queryParams("id"));
+            PublicacionServices as = new PublicacionServices();
+            Publicacion publicacion = as.getPublicacion((long) id);
+            Map<String, Object> modelo = new HashMap<>();
+            modelo.put("registeredUser", getLogUser(request));
+            modelo.put("publicacion", publicacion);
+            String etiqueta = "";
+
+            return renderThymeleaf(modelo, "/editarPublicacion");
+        });
+
+
+        post("/editarPublicacion", (request, response) -> {
+            PublicacionServices as = new PublicacionServices();
+            String descripcion = request.queryParams("descripcion");
+            String usuario = request.queryParams("usuario");
+            String tags = request.queryParams("etiquetas");
+            String img = request.queryParams("img")
+            long id = (long) Integer.parseInt( request.queryParams("id"));
+
+            as.actualizarPublicacion(descripcion, usuario, tags, id);
+
+            response.redirect("/index");
+            return "";
+        });
+
+
+        private Usuario getLogUser(Request request){
+
+            Usuario usuario = new Usuario();
+            Session session = request.session(true);
+
+            if(request.cookie("usuario") != null){
+                UsuarioServices us = new UsuarioServices();
+                usuario = us.getUsuario(Integer.parseInt(request.cookie("usuario")));
+                session.attribute("usuario", usuario);
+            }
+
+            if(session.attribute("usuario") != null) usuario = session.attribute("usuario");
+
+            return usuario;
+        }*/
     }
 
     // Declaración para simplificar el uso del motor de template Thymeleaf.
