@@ -82,7 +82,7 @@ public class ManejoRutasShant {
 
                     Session session = request.session(true);
                     session.attribute("usuario", user);
-                    response.redirect("/index");
+                    response.redirect("/inicio");
                 }
 
 
@@ -122,12 +122,12 @@ public class ManejoRutasShant {
             return null;
         });
 
-        get("/index", (request, response) -> {
+        get("/inicio", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("publicaciones", new PublicacionServices().listaPublicacion());
             Usuario u = UsuarioServices.getLogUser(request);
             modelo.put("usuario", u);
-            return renderThymeleaf(modelo,"/index");
+            return renderThymeleaf(modelo,"/inicio");
         });
 
         post("/inicio", (request, response) -> {
@@ -206,7 +206,7 @@ public class ManejoRutasShant {
 
             as.actualizarPublicacion(descripcion, usuario, tags, id);
 
-            response.redirect("/index");
+            response.redirect("/inicio");
             return "";
         });
 
