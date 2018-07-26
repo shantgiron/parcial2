@@ -1,7 +1,11 @@
 package rutas;
 
+import modelos.LikePublicacion;
+import modelos.Publicacion;
 import modelos.Usuario;
 import services.ComentarioServices;
+import services.LikePublicacionServices;
+import services.PublicacionServices;
 import services.UsuarioServices;
 import spark.ModelAndView;
 import spark.Request;
@@ -27,12 +31,20 @@ public class ManejoRutasGenerales {
     public void rutas(){
 
        get("/", (request, response) -> {
-            response.redirect("/login");
-            return "";
+           if(UsuarioServices.getLogUser(request) != null)
+               response.redirect("/inicio");
+           else
+               response.redirect("/login");
+
+           return "";
         });
 
         get("", (request, response) -> {
-            response.redirect("/login");
+            if(UsuarioServices.getLogUser(request) != null)
+                response.redirect("/inicio");
+            else
+                response.redirect("/login");
+
             return "";
         });
 
@@ -44,8 +56,39 @@ public class ManejoRutasGenerales {
             long usuarioid = ((Usuario)session.attribute("usuario")).getId();
 
             cs.crearComentario(request.queryParams("comentario"), usuarioid, publicacionid);
+            response.redirect("/perfil?publicacio=" + publicacionid);
+
             return "";
         });
+
+
+        post("/publicacion/likear", (request, response) -> {
+            long publicacionid = Long.parseLong(request.queryParams("publicacionid"));
+            long usuarioid = Long.parseLong(request.queryParams("usuarioid"));
+            LikePublicacionServices las = new LikePublicacionServices();
+
+            //aqui true se refiere a me gusta
+            if (request.queryMap().get("voto").value().equals("true")) {
+                las.setLikes(publicacionid, usuarioid, 1);
+            } else {
+                las.setLikes(publicacionid, usuarioid, 2);
+            }
+            return null;
+        });
+
+        get("/usuario/publicacion", (request, response) -> {
+            Map<String, Object> modelo = new HashMap<>();
+            Publicacion publicacion = PublicacionServices.getInstancia().find(Long.parseLong(request.queryParams("id")));
+            Usuario amigo = UsuarioServices.getInstancia().getUsuario( publicacion.getUsuario().getId() );
+
+            modelo.put("usuario", UsuarioServices.getLogUser(request));
+            modelo.put("amigo", amigo);
+            modelo.put("publicacion", publicacion);
+            modelo.put("comentarios", ComentarioServices.getInstancia().getComentarioByPublicacionID(publicacion.getId()));
+
+            return renderThymeleaf(modelo,"/perfil");
+        });
+
 
     }
 

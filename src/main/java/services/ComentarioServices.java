@@ -10,6 +10,16 @@ import java.util.Set;
 
 public class ComentarioServices extends GestionDb<Comentario>{
 
+    private static ComentarioServices instancia;
+
+
+    public static ComentarioServices getInstancia(){
+        if(instancia==null){
+            instancia = new ComentarioServices();
+        }
+        return instancia;
+    }
+
     public ComentarioServices(){
         super(Comentario.class);
     }

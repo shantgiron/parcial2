@@ -3,6 +3,7 @@ package rutas;
 
 import modelos.Publicacion;
 import modelos.Usuario;
+import services.ComentarioServices;
 import services.PublicacionServices;
 import services.UsuarioServices;
 import spark.ModelAndView;
@@ -162,12 +163,27 @@ public class ManejoRutasShant {
 
         get("/perfil", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
-            Usuario user = UsuarioServices.getLogUser(request);
-            modelo.put("usuario", user);
-            modelo.put("publicaciones", PublicacionServices.getInstancia().listaPublicacionByUduarioID(user.getId()));
+            String usuarioid = request.queryParams("usuario");
+            String publicacionid = request.queryParams("publicacion");
+            modelo.put("usuario", UsuarioServices.getLogUser(request));
 
-            return renderThymeleaf(modelo,"/perfilUsuario");
+            if(usuarioid != null) {
+                Usuario amigo = UsuarioServices.getInstancia().getUsuario(Long.parseLong(usuarioid));
+                modelo.put("amigo", amigo);
+                modelo.put("publicaciones", PublicacionServices.getInstancia().listaPublicacionByUduarioID(amigo.getId()));
+            }
+
+            if( publicacionid != null ){
+                Publicacion publicacion = PublicacionServices.getInstancia().find(Long.parseLong(publicacionid));
+                Usuario amigo = UsuarioServices.getInstancia().getUsuario( publicacion.getUsuario().getId() );
+                modelo.put("amigo", amigo);
+                modelo.put("publicacion", publicacion);
+                modelo.put("comentarios", ComentarioServices.getInstancia().getComentarioByPublicacionID(publicacion.getId()));
+            }
+
+            return renderThymeleaf(modelo,"/perfil");
         });
+
 
         get("/cerrarsesion", (request, response) -> {
             request.session().invalidate();
@@ -228,19 +244,6 @@ public class ManejoRutasShant {
 
             return usuario;
         }*/
-        
-        //Por si no ponen inicio
-        
-         get("",  (request, response) -> {
-            response.redirect("/inicio");
-            return "";
-        });
-
-        get("/",  (request, response) -> {
-            response.redirect("/inicio");
-            return "";
-        });
-
     }
 
     // Declaración para simplificar el uso del motor de template Thymeleaf.

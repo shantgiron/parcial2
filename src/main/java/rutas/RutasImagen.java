@@ -33,7 +33,7 @@ public void rutas(){
         Usuario usr = UsuarioServices.getLogUser(req);
         usr.setFotoPerfil(img);
         UsuarioServices.getInstancia().actualizarUsuario(usr);
-        res.redirect("/perfil");
+        res.redirect("/perfil?usuario=" + usr.getId());
         return "";
     });
 
@@ -42,7 +42,7 @@ public void rutas(){
         Usuario usr = UsuarioServices.getLogUser(req);
         usr.setFotoPortada(img);
         UsuarioServices.getInstancia().actualizarUsuario(usr);
-        res.redirect("/perfil");
+        res.redirect("/perfil?usuario=" + usr.getId() );
         return "";
     });
 

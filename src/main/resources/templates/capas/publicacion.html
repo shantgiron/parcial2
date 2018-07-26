@@ -1,6 +1,5 @@
-<div th:fragment="publicaciones" id="newsfeed-items-grid" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div th:each="publicacion : ${publicaciones}">
-        <div class="ui-block">
+<div th:fragment="publicacion" id="newsfeed-items-grid" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="ui-block">
             <article class="hentry post video">
                 <div class="post__author author vcard inline-items">
                     <img th:src="${publicacion.usuario.fotoPerfil}" alt="author" width="40" height="40">
@@ -13,19 +12,13 @@
                         </div>
                     </div>
 
-                    <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                    <div th:if="${amigo.id} == ${usuario.id}" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
                         <ul class="more-dropdown">
                             <li>
                                 <a href="#">Edit Post</a>
                             </li>
                             <li>
                                 <a href="#">Delete Post</a>
-                            </li>
-                            <li>
-                                <a href="#">Turn Off Notifications</a>
-                            </li>
-                            <li>
-                                <a href="#">Select as Featured</a>
                             </li>
                         </ul>
                     </div>
@@ -52,14 +45,44 @@
                 </div>
 
                 <div class="control-block-button post-control-button">
-
                     <a href="#" class="btn btn-control bg-primary" th:onclick="'javascript:likear(\''+ ${a} +'\');'">
                         <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
                     </a>
-
                 </div>
 
+                <!-- Comments -->
+                <ul class="comments-list">
+                    <li class="comment-item" th:each="comentario : ${comentarios}">
+                        <div class="post__author author vcard inline-items">
+                            <img th:src="${comentario.autor.fotoPerfil}"  alt="author">
+
+                            <div class="author-date">
+                                <a href="#" th:href="|/perfil?usuario=${comentario.autor.id}|" th:text="${comentario.autor.nombre}">James Spiegel</a>
+                            </div>
+
+                            <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+
+                        </div>
+
+                        <p th:text="${comentario.comentario}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
+
+                        <a href="#" class="post-add-icon inline-items">
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- ... end Comments -->
+
+                <form class="comment-form inline-items" action="/comentar" method="post" >
+                    <input type="hidden" name="publicacionid" th:value="${publicacion.id}">
+                    <div class="post__author author vcard inline-items">
+                        <img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
+                        <div class="form-group with-icon-right ">
+                            <textarea class="form-control" placeholder="Deja tu opinion.." name="comentario" required></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-md-2 btn-primary" type="submit">Comentar</button>
+                </form>
             </article>
         </div>
-    </div>
 </div>
