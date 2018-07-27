@@ -4,6 +4,7 @@ package rutas;
 import modelos.Publicacion;
 import modelos.Usuario;
 import services.ComentarioServices;
+import services.LikePublicacionServices;
 import services.PublicacionServices;
 import services.UsuarioServices;
 import spark.ModelAndView;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static spark.Spark.*;
@@ -125,8 +127,14 @@ public class ManejoRutasShant {
 
         get("/inicio", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
-            modelo.put("publicaciones", new PublicacionServices().listaPublicacion());
             Usuario u = UsuarioServices.getLogUser(request);
+            List<Publicacion> publicaciones = new PublicacionServices().listaPublicacion();
+
+            for( Publicacion p:publicaciones ){
+                p.setLeGusta(LikePublicacionServices.getInstancia().getLikesByPublicacionYUsuarioID(p.getId(), u.getId()));
+            }
+
+            modelo.put("publicaciones", publicaciones );
             modelo.put("usuario", u);
             return renderThymeleaf(modelo,"/inicio");
         });
@@ -169,12 +177,21 @@ public class ManejoRutasShant {
 
             if(usuarioid != null) {
                 Usuario amigo = UsuarioServices.getInstancia().getUsuario(Long.parseLong(usuarioid));
+
                 modelo.put("amigo", amigo);
-                modelo.put("publicaciones", PublicacionServices.getInstancia().listaPublicacionByUduarioID(amigo.getId()));
+                List<Publicacion> publicaciones =  PublicacionServices.getInstancia().listaPublicacionByUduarioID(amigo.getId());
+                Long usuario_id = Long.parseLong(usuarioid);
+                for( Publicacion p:publicaciones ){
+                    p.setLeGusta(LikePublicacionServices.getInstancia().getLikesByPublicacionYUsuarioID(p.getId(), usuario_id));
+                }
+
+                modelo.put("publicaciones",publicaciones);
             }
 
             if( publicacionid != null ){
                 Publicacion publicacion = PublicacionServices.getInstancia().find(Long.parseLong(publicacionid));
+                publicacion.setLikeCount(LikePublicacionServices.getInstancia().getLikesByPublicacionID(publicacion.getId()));
+                publicacion.setLeGusta(LikePublicacionServices.getInstancia().getLikesByPublicacionYUsuarioID(publicacion.getId(), Long.parseLong(usuarioid)));
                 Usuario amigo = UsuarioServices.getInstancia().getUsuario( publicacion.getUsuario().getId() );
                 modelo.put("amigo", amigo);
                 modelo.put("publicacion", publicacion);

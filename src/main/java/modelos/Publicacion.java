@@ -1,6 +1,8 @@
 package modelos;
 
 import org.hibernate.annotations.CreationTimestamp;
+import services.LikePublicacionServices;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -27,10 +29,26 @@ public class Publicacion {
     //el id del usuario dueño del muro
     private Long muro_de;
 
+    @Transient
+    private boolean leGusta = false;
+
     @OneToMany(fetch = FetchType.EAGER)
     private Set<Usuario> etiquetas;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Comentario> comentarios;
+
     private String img;
+
+    public long getLikeCount() {
+        return LikePublicacionServices.getInstancia().getLikesByPublicacionID(id);
+    }
+
+    public void setLikeCount(long likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    private  long likeCount;
 
     public void setNaturaleza(String naturaleza) {
         this.naturaleza = naturaleza;
@@ -113,6 +131,23 @@ public class Publicacion {
         this.muro_de = muro_de;
     }
 
+
+
+    public boolean isLeGusta() {
+        return leGusta;
+    }
+
+    public void setLeGusta(boolean leGusta) {
+        this.leGusta = leGusta;
+    }
+
+    public Set<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Set<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
 
 
 }

@@ -63,17 +63,14 @@ public class ManejoRutasGenerales {
 
 
         post("/publicacion/likear", (request, response) -> {
+            System.out.println("kieerteee lokeete0");
             long publicacionid = Long.parseLong(request.queryParams("publicacionid"));
             long usuarioid = Long.parseLong(request.queryParams("usuarioid"));
             LikePublicacionServices las = new LikePublicacionServices();
 
-            //aqui true se refiere a me gusta
-            if (request.queryMap().get("voto").value().equals("true")) {
-                las.setLikes(publicacionid, usuarioid, 1);
-            } else {
-                las.setLikes(publicacionid, usuarioid, 2);
-            }
-            return null;
+            las.setLikes(publicacionid, usuarioid);
+
+            return "";
         });
 
         get("/usuario/publicacion", (request, response) -> {

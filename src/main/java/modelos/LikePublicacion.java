@@ -17,8 +17,6 @@ public class LikePublicacion implements Serializable {
 
     public LikePublicacion() {}
 
-
-
     public long getPublicacionId() {
         return publicacionId;
     }

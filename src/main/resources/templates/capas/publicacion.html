@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="control-block-button post-control-button">
-                    <a href="#" class="btn btn-control bg-primary" th:onclick="'javascript:likear(\''+ ${a} +'\');'">
+                    <a th:id="'publicacion' + ${publicacion.id}" href="#" class="btn btn-control" th:classappend="${publicacion.leGusta} ? bg-primary : '' " th:onclick="'javascript:likear(\''+ ${a} +'\');'">
                         <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
                     </a>
                 </div>
