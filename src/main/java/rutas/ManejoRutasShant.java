@@ -1,24 +1,23 @@
 package rutas;
 
-
 import modelos.Album;
 import modelos.Publicacion;
+
+
 import modelos.Usuario;
 import services.*;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
-
 import javax.servlet.MultipartConfigElement;
 import java.io.File;
-import java.net.PortUnreachableException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static spark.Spark.*;
 
 public class ManejoRutasShant {
+
     public void rutas() {
         File uploadDir = new File("fotos");
         uploadDir.mkdir();
@@ -176,23 +175,21 @@ public class ManejoRutasShant {
                 String img = RutasImagen.guardarImagen("foto" + i, uploadDir, request);
 
                 if( "-1".equalsIgnoreCase(img)) continue;
-                   // System.out.println("********************* " + img);
-                    Publicacion publicacion = new Publicacion();
-                 //   System.out.println("El ID inicialmente es: " + publicacion.getId());
-                    publicacion.setDescripcion("Foto: " + i);
-                    publicacion.setUsuario(UsuarioServices.getLogUser(request));
-                    publicacion.setFecha(new Date());
-                    publicacion.setImg(img);
-                    publicacion.setMuro_de(Long.parseLong(request.queryParams("muro")));
+                Publicacion publicacion = new Publicacion();
 
-                    if(i == 1){
-                        publicacion.setNaturaleza("ALBUM");
-                        publicacion.setDescripcion(titulo);
-                    } else publicacion.setNaturaleza("ALBUM_FOTO");
+                publicacion.setDescripcion("Foto: " + i);
+                publicacion.setUsuario(UsuarioServices.getLogUser(request));
+                publicacion.setFecha(new Date());
+                publicacion.setImg(img);
+                publicacion.setMuro_de(Long.parseLong(request.queryParams("muro")));
 
-                    PublicacionServices.getInstancia().crear(publicacion);
-                  //  System.out.println("El ID luego de guardar es: " + publicacion.getId());
-                    publicaciones.add(publicacion);
+                if(i == 1){
+                    publicacion.setNaturaleza("ALBUM");
+                    publicacion.setDescripcion(titulo);
+                } else publicacion.setNaturaleza("ALBUM_FOTO");
+
+                PublicacionServices.getInstancia().crear(publicacion);
+                publicaciones.add(publicacion);
             }
 
             Album album = new Album( new HashSet<>(publicaciones) );
@@ -231,7 +228,13 @@ public class ManejoRutasShant {
                 publicacion.setLeGusta(LikePublicacionServices.getInstancia().getLikesByPublicacionYUsuarioID(publicacion.getId(), Long.parseLong(usuarioid)));
                 Usuario amigo = UsuarioServices.getInstancia().getUsuario( publicacion.getUsuario().getId() );
                 modelo.put("amigo", amigo);
-                modelo.put("publicacion", publicacion);
+
+
+                if( publicacion.getAlbum_id() != null){
+                    modelo.put("album", AlbumServices.getInstancia().find(publicacion.getAlbum_id()));
+                }else{
+                    modelo.put("publicacion", publicacion);
+                }
                 modelo.put("comentarios", ComentarioServices.getInstancia().getComentarioByPublicacionID(publicacion.getId()));
             }
 
@@ -243,8 +246,9 @@ public class ManejoRutasShant {
             response.redirect("/login");
             return null;
         });
-        
-         /*  post("/borrarPublicacion", (request, response) -> {
+
+      /*
+        post("/borrarPublicacion", (request, response) -> {
             PublicacionServices as = new PublicacionServices();
             Session session = request.session(true);
             int publicacionid = Integer.parseInt(request.queryParams("publicacionid"));
@@ -266,7 +270,6 @@ public class ManejoRutasShant {
             return renderThymeleaf(modelo, "/editarPublicacion");
         });
 
-
         post("/editarPublicacion", (request, response) -> {
             PublicacionServices as = new PublicacionServices();
             String descripcion = request.queryParams("descripcion");
@@ -280,7 +283,6 @@ public class ManejoRutasShant {
             response.redirect("/inicio");
             return "";
         });
-
 
         private Usuario getLogUser(Request request){
 
@@ -303,4 +305,5 @@ public class ManejoRutasShant {
     public static String renderThymeleaf(Map<String, Object> model, String templatePath) {
         return new ThymeleafTemplateEngine().render(new ModelAndView(model, templatePath));
     }
+
 }

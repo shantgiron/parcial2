@@ -3,10 +3,7 @@ package rutas;
 import modelos.LikePublicacion;
 import modelos.Publicacion;
 import modelos.Usuario;
-import services.ComentarioServices;
-import services.LikePublicacionServices;
-import services.PublicacionServices;
-import services.UsuarioServices;
+import services.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -81,7 +78,13 @@ public class ManejoRutasGenerales {
 
             modelo.put("usuario", UsuarioServices.getLogUser(request));
             modelo.put("amigo", amigo);
-            modelo.put("publicacion", publicacion);
+
+            if( publicacion.getAlbum_id() != null){
+                modelo.put("album", AlbumServices.getInstancia().find(publicacion.getAlbum_id()));
+            }else{
+                modelo.put("publicacion", publicacion);
+            }
+
             modelo.put("comentarios", ComentarioServices.getInstancia().getComentarioByPublicacionID(publicacion.getId()));
 
             return renderThymeleaf(modelo,"/perfil");

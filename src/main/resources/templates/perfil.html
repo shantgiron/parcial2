@@ -135,8 +135,14 @@
 				<div th:replace="capas/publicaciones">
 				</div>
 			</div>
-			<div th:if="${publicacion}" >
+			<div th:if="${publicacion}">
 				<div th:replace="capas/publicacion">
+				</div>
+			</div>
+			<div th:if="${album}">
+				<div th:each="publicacion : ${album.fotos}">
+					<div th:replace="capas/publicacion">
+					</div>
 				</div>
 			</div>
 		</div>
