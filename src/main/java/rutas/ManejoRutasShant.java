@@ -1,12 +1,10 @@
 package rutas;
 
 
+import modelos.Album;
 import modelos.Publicacion;
 import modelos.Usuario;
-import services.ComentarioServices;
-import services.LikePublicacionServices;
-import services.PublicacionServices;
-import services.UsuarioServices;
+import services.*;
 import spark.ModelAndView;
 import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -16,10 +14,7 @@ import java.io.File;
 import java.net.PortUnreachableException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static spark.Spark.*;
 
@@ -158,11 +153,53 @@ public class ManejoRutasShant {
 
             publicacion.setMuro_de(UsuarioServices.getLogUser(request).getId());
 
-            if(img != "-1") publicacion.setNaturaleza("FOTO");
+            if(!"-1".equalsIgnoreCase(img)) publicacion.setNaturaleza("FOTO");
 
 
             PublicacionServices.getInstancia().crear(publicacion);
 
+
+            response.redirect("/inicio");
+
+            return "";
+        });
+
+        post("/album", (request, response) -> {
+            //super importante, para leer los campos ya se se codifican diferente gracias a la imagen
+            request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            String titulo = request.queryParams("titulo");
+
+            List<Publicacion> publicaciones = new ArrayList<>();
+
+            for(int i = 1; i<=5; i++){
+                String img = RutasImagen.guardarImagen("foto" + i, uploadDir, request);
+
+                if( "-1".equalsIgnoreCase(img)) continue;
+                   // System.out.println("********************* " + img);
+                    Publicacion publicacion = new Publicacion();
+                 //   System.out.println("El ID inicialmente es: " + publicacion.getId());
+                    publicacion.setDescripcion("Foto: " + i);
+                    publicacion.setUsuario(UsuarioServices.getLogUser(request));
+                    publicacion.setFecha(new Date());
+                    publicacion.setImg(img);
+                    publicacion.setMuro_de(Long.parseLong(request.queryParams("muro")));
+
+                    if(i == 1){
+                        publicacion.setNaturaleza("ALBUM");
+                        publicacion.setDescripcion(titulo);
+                    } else publicacion.setNaturaleza("ALBUM_FOTO");
+
+                    PublicacionServices.getInstancia().crear(publicacion);
+                  //  System.out.println("El ID luego de guardar es: " + publicacion.getId());
+                    publicaciones.add(publicacion);
+            }
+
+            Album album = new Album( new HashSet<>(publicaciones) );
+            AlbumServices.getInstancia().crear(album);
+
+            publicaciones.get(0).setAlbum_id(album.getId());
+            PublicacionServices.getInstancia().editar( publicaciones.get(0) );
 
             response.redirect("/inicio");
 
@@ -200,7 +237,6 @@ public class ManejoRutasShant {
 
             return renderThymeleaf(modelo,"/perfil");
         });
-
 
         get("/cerrarsesion", (request, response) -> {
             request.session().invalidate();

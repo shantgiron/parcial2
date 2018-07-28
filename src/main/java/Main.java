@@ -61,8 +61,9 @@ public class Main {
         new ManejoRutasShant().rutas();
 
 
-        //Aplicando los filtros
        new Filtros().aplicarFiltros();
+
+       new ManejoExcepciones().manejoExcepciones();
 
 
     }

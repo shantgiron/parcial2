@@ -40,6 +40,8 @@ public class Publicacion {
 
     private String img;
 
+    private Long album_id = null;
+
     public long getLikeCount() {
         return LikePublicacionServices.getInstancia().getLikesByPublicacionID(id);
     }
@@ -149,7 +151,13 @@ public class Publicacion {
         this.comentarios = comentarios;
     }
 
+    public Long getAlbum_id() {
+        return album_id;
+    }
 
+    public void setAlbum_id(Long album_id) {
+        this.album_id = album_id;
+    }
 }
 
 

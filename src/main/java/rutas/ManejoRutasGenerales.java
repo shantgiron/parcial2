@@ -13,6 +13,7 @@ import spark.Response;
 import spark.Session;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import javax.servlet.MultipartConfigElement;
 import java.util.*;
 
 import static java.lang.Math.max;
@@ -56,7 +57,7 @@ public class ManejoRutasGenerales {
             long usuarioid = ((Usuario)session.attribute("usuario")).getId();
 
             cs.crearComentario(request.queryParams("comentario"), usuarioid, publicacionid);
-            response.redirect("/perfil?publicacio=" + publicacionid);
+            response.redirect("/publicacion?id=" + publicacionid);
 
             return "";
         });
@@ -73,7 +74,7 @@ public class ManejoRutasGenerales {
             return "";
         });
 
-        get("/usuario/publicacion", (request, response) -> {
+        get("/publicacion", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
             Publicacion publicacion = PublicacionServices.getInstancia().find(Long.parseLong(request.queryParams("id")));
             Usuario amigo = UsuarioServices.getInstancia().getUsuario( publicacion.getUsuario().getId() );

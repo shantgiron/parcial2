@@ -12,11 +12,11 @@
 	<!-- Main Font -->
 	<script src="js/webfontloader.min.js"></script>
 	<script>
-		WebFont.load({
-			google: {
-				families: ['Roboto:300,400,500,700:latin']
-			}
-		});
+        WebFont.load({
+            google: {
+                families: ['Roboto:300,400,500,700:latin']
+            }
+        });
 	</script>
 
 	<!-- Bootstrap CSS -->
@@ -31,8 +31,6 @@
 
 </head>
 <body>
-
-
 
 <div class="fixed-sidebar right fixed-sidebar-responsive">
 
@@ -108,23 +106,29 @@
 		<main class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 
 			<div class="ui-block">
-				
+
 				<!-- News Feed Form  -->
-				
+
 				<div class="news-feed-form">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item">
-							<a class="nav-link active inline-items" data-toggle="tab" href="#home-1" role="tab" aria-expanded="true">
+							<a class="nav-link active inline-items" data-toggle="tab" href="#post_tab" role="tab" aria-expanded="true">
 								<svg class="olymp-status-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-status-icon"></use></svg>
 								<span>Estado</span>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link inline-items" data-toggle="tab" href="#album_tab" role="tab" aria-expanded="false">
+								<svg class="olymp-multimedia-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-multimedia-icon"></use></svg>
+								<span>Album</span>
+							</a>
+						</li>
 					</ul>
-				
+
 					<!-- Tab panes -->
 					<div class="tab-content">
-						<div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
+						<div class="tab-pane active" id="post_tab" role="tabpanel" aria-expanded="true">
 							<form action="/inicio" method="post"  enctype='multipart/form-data'>
 								<div class="author-thumb">
 									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
@@ -134,145 +138,132 @@
 									<textarea class="form-control" placeholder="" name="descripcion" required></textarea>
 									<input type='file' name="foto" accept='.png'>
 								</div>
-
 								<div class="add-options-message">
-									<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="ADD PHOTOS">
-										<svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
-									</a>
-									<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="TAG YOUR FRIENDS">
-										<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
-									</a>
 									<button type="submit" class="btn btn-primary btn-md-2">Publicar Estado</button>
 								</div>
-				
 							</form>
 						</div>
 
-						<div class="tab-pane" id="blog" role="tabpanel" aria-expanded="true">
-							<form>
+						<div class="tab-pane" id="album_tab" role="tabpanel" aria-expanded="true">
+							<form action="/album" method="post"  enctype='multipart/form-data' >
+								<input type="hidden" name="muro" th:value="${usuario.id}">
 								<div class="author-thumb">
 									<img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
 								</div>
 								<div class="form-group with-icon label-floating is-empty">
-									<label class="control-label">Share what you are thinking here...</label>
-									<textarea class="form-control" placeholder=""  ></textarea>
+									<label class="control-label">Título del álbum..</label>
+									<textarea type="text" name="titulo" class="form-control" style="height:25px !important;"> </textarea>
+									<input type='file' name="foto1" accept='.png' required>
+									<input type='file' name="foto2" accept='.png' required>
+									<input type='file' name="foto3" accept='.png'>
+									<input type='file' name="foto4" accept='.png'>
+									<input type='file' name="foto5" accept='.png'>
 								</div>
 								<div class="add-options-message">
-									<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="ADD PHOTOS">
-										<svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
-									</a>
-									<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="TAG YOUR FRIENDS">
-										<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
-									</a>
-				
-									<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="ADD LOCATION">
-										<svg class="olymp-small-pin-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-small-pin-icon"></use></svg>
-									</a>
-				
-									<button class="btn btn-primary btn-md-2">Post Status</button>
-									<button   class="btn btn-md-2 btn-border-think btn-transparent c-grey">Preview</button>
-				
+									<!--<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="ADD LOCATION">-->
+									<!--<svg class="olymp-small-pin-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-small-pin-icon"></use></svg>-->
+									<!--</a>-->
+									<button type="submit" class="btn btn-primary btn-md-2">Subir &Aacute;lbum</button>
 								</div>
-				
 							</form>
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- ... end News Feed Form  -->			</div>
 
 			<div th:replace="capas/publicaciones">
-            </div>
+			</div>
 		</main>
-        <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
-            <div class="ui-block">
+		<aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-12 col-12">
+			<div class="ui-block">
 
-                <!-- W-Birthsday-Alert -->
+				<!-- W-Birthsday-Alert -->
 
-                <div class="widget w-birthday-alert">
-                    <div class="icons-block">
-                        <svg class="olymp-cupcake-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-cupcake-icon"></use></svg>
-                        <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-                    </div>
+				<div class="widget w-birthday-alert">
+					<div class="icons-block">
+						<svg class="olymp-cupcake-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-cupcake-icon"></use></svg>
+						<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+					</div>
 
-                    <div class="content">
-                        <div class="author-thumb">
-                            <img src="img/avatar48-sm.jpg" alt="author">
-                        </div>
-                        <span>Today is</span>
-                        <a href="#" class="h4 title">Marina Valentine’s Birthday!</a>
-                        <p>Leave her a message with your best wishes on her profile page!</p>
-                    </div>
-                </div>
+					<div class="content">
+						<div class="author-thumb">
+							<img src="img/avatar48-sm.jpg" alt="author">
+						</div>
+						<span>Today is</span>
+						<a href="#" class="h4 title">Marina Valentine’s Birthday!</a>
+						<p>Leave her a message with your best wishes on her profile page!</p>
+					</div>
+				</div>
 
-                <!-- ... end W-Birthsday-Alert -->			</div>
-            <div class="ui-block">
-                <div class="ui-block-title">
-                    <h6 class="title">Sugerencias de Amistad</h6>
-                    <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-                </div>
+				<!-- ... end W-Birthsday-Alert -->			</div>
+			<div class="ui-block">
+				<div class="ui-block-title">
+					<h6 class="title">Sugerencias de Amistad</h6>
+					<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+				</div>
 
 
 
-                <!-- W-Action -->
+				<!-- W-Action -->
 
-                <ul class="widget w-friend-pages-added notification-list friend-requests">
-                    <li class="inline-items">
-                        <div class="author-thumb">
-                            <img src="img/avatar38-sm.jpg" alt="author">
-                        </div>
-                        <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Francine Smith</a>
-                            <span class="chat-message-item">8 Amigos en comun</span>
-                        </div>
-                        <span class="notification-icon">
+				<ul class="widget w-friend-pages-added notification-list friend-requests">
+					<li class="inline-items">
+						<div class="author-thumb">
+							<img src="img/avatar38-sm.jpg" alt="author">
+						</div>
+						<div class="notification-event">
+							<a href="#" class="h6 notification-friend">Francine Smith</a>
+							<span class="chat-message-item">8 Amigos en comun</span>
+						</div>
+						<span class="notification-icon">
 							<a href="#" class="accept-request">
 								<span class="icon-add without-text">
 									<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
 								</span>
 							</a>
 						</span>
-                    </li>
+					</li>
 
-                    <li class="inline-items">
-                        <div class="author-thumb">
-                            <img src="img/avatar39-sm.jpg" alt="author">
-                        </div>
-                        <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Hugh Wilson</a>
-                            <span class="chat-message-item">6 Friends in Common</span>
-                        </div>
-                        <span class="notification-icon">
+					<li class="inline-items">
+						<div class="author-thumb">
+							<img src="img/avatar39-sm.jpg" alt="author">
+						</div>
+						<div class="notification-event">
+							<a href="#" class="h6 notification-friend">Hugh Wilson</a>
+							<span class="chat-message-item">6 Friends in Common</span>
+						</div>
+						<span class="notification-icon">
 							<a href="#" class="accept-request">
 								<span class="icon-add without-text">
 									<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
 								</span>
 							</a>
 						</span>
-                    </li>
+					</li>
 
-                    <li class="inline-items">
-                        <div class="author-thumb">
-                            <img src="img/avatar40-sm.jpg" alt="author">
-                        </div>
-                        <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Karen Masters</a>
-                            <span class="chat-message-item">6 Friends in Common</span>
-                        </div>
-                        <span class="notification-icon">
+					<li class="inline-items">
+						<div class="author-thumb">
+							<img src="img/avatar40-sm.jpg" alt="author">
+						</div>
+						<div class="notification-event">
+							<a href="#" class="h6 notification-friend">Karen Masters</a>
+							<span class="chat-message-item">6 Friends in Common</span>
+						</div>
+						<span class="notification-icon">
 							<a href="#" class="accept-request">
 								<span class="icon-add without-text">
 									<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
 								</span>
 							</a>
 						</span>
-                    </li>
+					</li>
 
-                </ul>
+				</ul>
 
-                <!-- ... end W-Action -->
-            </div>
-        </aside>
+				<!-- ... end W-Action -->
+			</div>
+		</aside>
 	</div>
 </div>
 
@@ -544,159 +535,159 @@
 
 			<form class="need-validation">
 
-		<div class="form-group label-floating is-empty">
-			<label class="control-label">Press enter to post...</label>
-			<textarea class="form-control" placeholder=""></textarea>
-			<div class="add-options-message">
-				<a href="#" class="options-message">
-					<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
-				</a>
-				<div class="options-message smile-block">
+				<div class="form-group label-floating is-empty">
+					<label class="control-label">Press enter to post...</label>
+					<textarea class="form-control" placeholder=""></textarea>
+					<div class="add-options-message">
+						<a href="#" class="options-message">
+							<svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
+						</a>
+						<div class="options-message smile-block">
 
-					<svg class="olymp-happy-sticker-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-sticker-icon"></use></svg>
+							<svg class="olymp-happy-sticker-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-sticker-icon"></use></svg>
 
-					<ul class="more-dropdown more-with-triangle triangle-bottom-right">
-						<li>
-							<a href="#">
-								<img src="img/icon-chat1.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat2.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat3.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat4.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat5.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat6.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat7.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat8.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat9.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat10.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat11.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat12.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat13.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat14.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat15.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat16.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat17.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat18.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat19.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat20.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat21.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat22.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat23.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat24.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat25.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat26.png" alt="icon">
-							</a>
-						</li>
-						<li>
-							<a href="#">
-								<img src="img/icon-chat27.png" alt="icon">
-							</a>
-						</li>
-					</ul>
+							<ul class="more-dropdown more-with-triangle triangle-bottom-right">
+								<li>
+									<a href="#">
+										<img src="img/icon-chat1.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat2.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat3.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat4.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat5.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat6.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat7.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat8.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat9.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat10.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat11.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat12.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat13.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat14.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat15.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat16.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat17.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat18.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat19.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat20.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat21.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat22.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat23.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat24.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat25.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat26.png" alt="icon">
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<img src="img/icon-chat27.png" alt="icon">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
 
-	</form>
+			</form>
 		</div>
 	</div>
 
