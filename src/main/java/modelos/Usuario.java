@@ -25,33 +25,6 @@ public class Usuario{
     private String fotoPortada;
     private boolean admin = false;
 
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public String getFotoPortada() {
-        return fotoPortada;
-    }
-
-    public void setFotoPortada(String fotoPortada) {
-        this.fotoPortada = fotoPortada;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFotoPerfil() {
-        return fotoPerfil;
-    }
-
-    public void setFotoPerfil(String fotoPerfil) {
-        this.fotoPerfil = fotoPerfil;
-    }
 
 
     @Column(columnDefinition =  "boolean default false")
@@ -61,6 +34,16 @@ public class Usuario{
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_nacimiento;
+
+
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Notificacion> notificiones;
+
+
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Amigo> amigos;
+
+
 
 
     public Usuario(){};
@@ -144,5 +127,48 @@ public class Usuario{
     public void setAdministrador(boolean administrador) {
         this.administrador = administrador;
     }
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+    public String getFotoPortada() {
+        return fotoPortada;
+    }
+
+    public void setFotoPortada(String fotoPortada) {
+        this.fotoPortada = fotoPortada;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
+    public Set<Notificacion> getNotificiones() {
+        return notificiones;
+    }
+
+    public void setNotificiones(Set<Notificacion> notificiones) {
+        this.notificiones = notificiones;
+    }
+    public Set<Amigo> getAmigos() {
+        return amigos;
+    }
+
+    public void setAmigos(Set<Amigo> amigos) {
+        this.amigos = amigos;
+    }
+
 
 }

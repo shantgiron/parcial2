@@ -1,0 +1,70 @@
+<div th:fragment="publicar" class="ui-block" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <!-- News Feed Form  -->
+
+    <div class="news-feed-form">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active inline-items" data-toggle="tab" href="#post_tab" role="tab" aria-expanded="true">
+                    <svg class="olymp-status-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-status-icon"></use></svg>
+                    <span>Estado</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link inline-items" data-toggle="tab" href="#album_tab" role="tab" aria-expanded="false">
+                    <svg class="olymp-multimedia-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-multimedia-icon"></use></svg>
+                    <span>Album</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="post_tab" role="tabpanel" aria-expanded="true">
+                <form action="/inicio" method="post"  enctype='multipart/form-data'>
+                    <input th:if="${amigo}" type="hidden" name="muro" th:value="${amigo.id}">
+                    <input th:unless="${amigo}" type="hidden" name="muro" th:value="${usuario.id}">
+                    <div class="author-thumb">
+                        <img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
+                    </div>
+                    <div class="form-group with-icon label-floating is-empty">
+                        <label class="control-label"> Comparte lo que estas pensando...</label>
+                        <textarea class="form-control" placeholder="" name="descripcion" required></textarea>
+                        <input type='file' name="foto" accept='.png'>
+                    </div>
+                    <div class="add-options-message">
+                        <button type="submit" class="btn btn-primary btn-md-2">Publicar Estado</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="tab-pane" id="album_tab" role="tabpanel" aria-expanded="true">
+                <form action="/album" method="post"  enctype='multipart/form-data' >
+                    <input th:if="${amigo}" type="hidden" name="muro" th:value="${amigo.id}">
+                    <input th:unless="${amigo}" type="hidden" name="muro" th:value="${usuario.id}">
+                    <div class="author-thumb">
+                        <img  th:src="${usuario.fotoPerfil}" width="40" height="40"   alt="author">
+                    </div>
+                    <div class="form-group with-icon label-floating is-empty">
+                        <label class="control-label">Título del álbum..</label>
+                        <textarea type="text" name="titulo" class="form-control" style="height:25px !important;"> </textarea>
+                        <input type='file' name="foto1" accept='.png' required>
+                        <input type='file' name="foto2" accept='.png' required>
+                        <input type='file' name="foto3" accept='.png'>
+                        <input type='file' name="foto4" accept='.png'>
+                        <input type='file' name="foto5" accept='.png'>
+                    </div>
+                    <div class="add-options-message">
+                        <!--<a href="#" class="options-message" data-toggle="tooltip" data-placement="top"   data-original-title="ADD LOCATION">-->
+                        <!--<svg class="olymp-small-pin-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-small-pin-icon"></use></svg>-->
+                        <!--</a>-->
+                        <button type="submit" class="btn btn-primary btn-md-2">Subir &Aacute;lbum</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ... end News Feed Form  -->
+</div>

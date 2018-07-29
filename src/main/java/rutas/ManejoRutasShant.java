@@ -130,6 +130,7 @@ public class ManejoRutasShant {
 
             modelo.put("publicaciones", publicaciones );
             modelo.put("usuario", u);
+            modelo.put("usuarios", UsuarioServices.getInstancia().findAll());
             return renderThymeleaf(modelo,"/inicio");
         });
 
@@ -150,7 +151,7 @@ public class ManejoRutasShant {
 
             publicacion.setImg(img);
 
-            publicacion.setMuro_de(UsuarioServices.getLogUser(request).getId());
+            publicacion.setMuro_de(Long.parseLong(request.queryParams("muro")));
 
             if(!"-1".equalsIgnoreCase(img)) publicacion.setNaturaleza("FOTO");
 

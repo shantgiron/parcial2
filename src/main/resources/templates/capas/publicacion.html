@@ -37,12 +37,19 @@
                 </div>
 
                 <div  th:if="${publicacion.naturaleza} == 'ALBUM'">
-                    <h6>Ha publicado un album:</h6>
+                    <h7>Ha publicado el album:</h7>
+                    <h6  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</h6>
                     <div class="post-thumb">
                         <img th:src="${publicacion.img}" alt="photo">
                     </div>
-                    <p  th:text="${publicacion.descripcion}">Hey Cindiii, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
                 </div>
+
+                <div  th:if="${publicacion.naturaleza} == 'ALBUM_FOTO'">
+                     <div class="post-thumb">
+                        <img th:src="${publicacion.img}" alt="photo">
+                    </div>
+                </div>
+
 
                 <div class="ui-block-title">
                     <h6 class="title">Comentarios: </h6>

@@ -9,22 +9,23 @@ public class Amigo {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Usuario usuario1;
+    public Usuario getAmigo() {
+        return amigo;
+    }
+
+    public void setAmigo(Usuario amigo) {
+        this.amigo = amigo;
+    }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Usuario usuario2;
+    private Usuario amigo;
+
 
     @Column(columnDefinition =  "boolean default false")
     boolean confirmado;
 
     public Amigo(){}
 
-    public Amigo(Usuario usuario1, Usuario usuario2, boolean confirmado) {
-        this.usuario1 = usuario1;
-        this.usuario2 = usuario2;
-        this.confirmado = confirmado;
-    }
 
     public Long getId() {
         return id;
@@ -32,22 +33,6 @@ public class Amigo {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Usuario getUsuario1() {
-        return usuario1;
-    }
-
-    public void setUsuario1(Usuario usuario) {
-        this.usuario1 = usuario;
-    }
-
-    public Usuario getUsuario2() {
-        return usuario2;
-    }
-
-    public void setUsuario2(Usuario usuario) {
-        this.usuario2 = usuario;
     }
 
     public boolean isConfirmado() {

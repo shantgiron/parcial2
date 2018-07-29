@@ -1,5 +1,6 @@
 package rutas;
 
+import modelos.Amigo;
 import modelos.LikePublicacion;
 import modelos.Publicacion;
 import modelos.Usuario;
@@ -61,9 +62,8 @@ public class ManejoRutasGenerales {
 
 
         post("/publicacion/likear", (request, response) -> {
-            System.out.println("kieerteee lokeete0");
-            long publicacionid = Long.parseLong(request.queryParams("publicacionid"));
-            long usuarioid = Long.parseLong(request.queryParams("usuarioid"));
+           long publicacionid = Long.parseLong(request.queryParams("publicacionid"));
+            long usuarioid = UsuarioServices.getLogUser(request).getId();
             LikePublicacionServices las = new LikePublicacionServices();
 
             las.setLikes(publicacionid, usuarioid);
@@ -90,6 +90,19 @@ public class ManejoRutasGenerales {
             return renderThymeleaf(modelo,"/perfil");
         });
 
+        get("/solicitar", (request, response) -> {
+            long amigoid = Long.parseLong(request.queryParams("amigo"));
+            AmigoServices.getInstancia().solicitarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
+
+           return "";
+        });
+
+        get("/aceptar", (request, response) -> {
+            long amigoid = Long.parseLong(request.queryParams("amigo"));
+            AmigoServices.getInstancia().aceptarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
+
+           return "";
+        });
 
     }
 

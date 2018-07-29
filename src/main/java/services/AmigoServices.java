@@ -1,6 +1,7 @@
 package services;
 
 import modelos.Amigo;
+import modelos.Notificacion;
 import modelos.Usuario;
 
 import javax.persistence.EntityManager;
@@ -9,35 +10,73 @@ import java.util.List;
 
 public class AmigoServices extends GestionDb<Amigo> {
 
-    private static UsuarioServices instancia;
+    private static AmigoServices instancia;
 
     public AmigoServices() {
-        super(Amigo.class);
+        super( Amigo.class);
     }
 
-    public static UsuarioServices getInstancia(){
+    public static AmigoServices getInstancia(){
         if(instancia==null){
-            instancia = new UsuarioServices();
+            instancia = new AmigoServices();
         }
         return instancia;
     }
 
     public boolean solicitarAmigo(Usuario usuario1, Usuario usuario2){
-        Amigo amigo = new Amigo(usuario1, usuario2, false);
+        Amigo amigo = new Amigo();
+
+        amigo.setAmigo(usuario2);
+        amigo.setConfirmado(false);
+
         //creo la amistad
         crear( amigo );
+
+        usuario1.getAmigos().add(amigo);
+        UsuarioServices.getInstancia().editar(usuario1);
+
+        //notifico
+        Notificacion n = new Notificacion();
+
+        n.setDescripcion("<a href='/perfil?usuario='" + usuario1.getId() +">" + usuario1.getNombre() + " " + usuario1.getApellido() + "</a>, quiere agregarte." );
+        n.setVinculo("/aceptar?amigo=" + usuario1.getId());
+
+        usuario2.getNotificiones().add(n);
+        UsuarioServices.getInstancia().editar(usuario2);
+
+        return true;
+    }
+
+
+    public boolean aceptarAmigo(Usuario usuario1, Usuario usuario2){
+        Amigo amigo = new Amigo();
+
+        amigo.setAmigo(usuario2);
+        amigo.setConfirmado(true);
+
+        //creo la amistad
+        crear( amigo );
+
+        usuario1.getAmigos().add(amigo);
+        UsuarioServices.getInstancia().editar(usuario1);
+
+        usuario2.getAmigos().forEach(ami->{
+                 if(ami.getAmigo().getId().equals( usuario1.getId() )){
+                ami.setConfirmado(true);
+                UsuarioServices.getInstancia().editar(usuario2);
+            }
+        });
+
         return true;
     }
 
 
     public List<Usuario> getAmigosByUsuarioID(long usuarioID){
-
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("select a.usuario2 from Amigo a where a.usuario1_id =:usuarioID");
+        Query query = em.createQuery("select a from Usuario u JOIN u.amigos a where u.id =:usuarioID and a.confirmado = true");
         query.setParameter("usuarioID", usuarioID);
         List<Usuario> lista = query.getResultList();
         em.close();
-
         return lista;
     }
 

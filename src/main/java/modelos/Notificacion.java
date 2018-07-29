@@ -17,6 +17,7 @@ public class Notificacion {
     @Column(columnDefinition = "text")
     private String vinculo;
 
+
     public Long getId() {
         return id;
     }
