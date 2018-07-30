@@ -26,6 +26,21 @@ public class Usuario{
     private String fotoPerfil;
     private String fotoPortada;
     private boolean admin = false;
+    private String website;
+    private String telefono;
+    private String pais;
+    private String provincia;
+    private String ciudad;
+    private String descripcion_personal;
+    private String genero;
+    private String religion;
+    private String lugar_de_nacimiento;
+    private String ocupacion;
+    private String inclinacion_politica;
+    private String facebook;
+    private String twitter;
+    private String spotify;
+
 
 
 
@@ -183,4 +198,115 @@ public class Usuario{
     }
 
 
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getDescripcion_personal() {
+        return descripcion_personal;
+    }
+
+    public void setDescripcion_personal(String descripcion_personal) {
+        this.descripcion_personal = descripcion_personal;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getReligion() {
+        return religion;
+    }
+
+    public void setReligion(String religion) {
+        this.religion = religion;
+    }
+
+    public String getLugar_de_nacimiento() {
+        return lugar_de_nacimiento;
+    }
+
+    public void setLugar_de_nacimiento(String lugar_de_nacimiento) {
+        this.lugar_de_nacimiento = lugar_de_nacimiento;
+    }
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
+    }
+
+    public String getInclinacion_politica() {
+        return inclinacion_politica;
+    }
+
+    public void setInclinacion_politica(String inclinacion_politica) {
+        this.inclinacion_politica = inclinacion_politica;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
+    public String getSpotify() {
+        return spotify;
+    }
+
+    public void setSpotify(String spotify) {
+        this.spotify = spotify;
+    }
 }
