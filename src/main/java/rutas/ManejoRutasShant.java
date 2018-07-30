@@ -35,6 +35,20 @@ public class ManejoRutasShant {
             usuario.setFotoPerfil("/img/badge4.png");
             usuario.setFotoPortada("img/top-header1.jpg");
             usuario.setAdmin(true);
+            usuario.setWebsite("sysservices.site");
+            usuario.setTelefono("8095820000");
+            usuario.setPais("Republica Dominicana");
+            usuario.setProvincia("Santiago");
+            usuario.setCiudad("Santiago de los caballeros");
+            usuario.setDescripcion_personal("Soy una joven normal... aveces");
+            usuario.setGenero("Femenino");
+            usuario.setReligion("Catolica");
+            usuario.setLugar_de_nacimiento("Santiago de los caballeros");
+            usuario.setOcupacion("Estudiante");
+            usuario.setInclinacion_politica("ninguna");
+            usuario.setFacebook("www.facebook.com/admin");
+            usuario.setTwitter("www.twitter.com/admin");
+            usuario.setSpotify("www.spotify.com/sgiron");
 
             new UsuarioServices().crearUsuario(usuario);
         }
@@ -83,9 +97,6 @@ public class ManejoRutasShant {
                 }
 
 
-
-
-
             } else {
                 Usuario usuario = new Usuario();
 
@@ -94,6 +105,7 @@ public class ManejoRutasShant {
                 String correo = request.queryParams("correo");
                 String contrasena = request.queryParams("contrasena");
                 String cumpleanos = request.queryParams("cumpleanos");
+
 
                 usuario.setNombre(nombre);
                 usuario.setApellido(apellido);
@@ -104,6 +116,7 @@ public class ManejoRutasShant {
                 usuario.setFotoPerfil("/img/badge3.png");
                 usuario.setFotoPortada("/img/top-header1.jpg");
                 usuario.setAdmin(true);
+
 
                 new UsuarioServices().crearUsuario(usuario);
 
@@ -276,7 +289,7 @@ public class ManejoRutasShant {
             String descripcion = request.queryParams("descripcion");
             String usuario = request.queryParams("usuario");
             String tags = request.queryParams("etiquetas");
-            String img = request.queryParams("img")
+            String img = request.queryParams("img");
             long id = (long) Integer.parseInt( request.queryParams("id"));
 
             as.actualizarPublicacion(descripcion, usuario, tags, id);
