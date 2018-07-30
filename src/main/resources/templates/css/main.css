@@ -123,6 +123,12 @@ Description: "HTML-template"
 /*------------- #THEME-STYLES --------------*/
 /*------------- #VARIABLES --------------*/
 /*------------- #HEADER --------------*/
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css);
+@import url(https://yui.yahooapis.com/pure/0.3.0/pure-min.css);
+
 .header {
   height: 70px;
   background-color: #3f4257;

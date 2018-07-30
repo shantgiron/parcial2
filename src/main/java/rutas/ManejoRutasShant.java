@@ -122,7 +122,7 @@ public class ManejoRutasShant {
         get("/inicio", (request, response) -> {
             Map<String, Object> modelo = new HashMap<>();
             Usuario u = UsuarioServices.getLogUser(request);
-            List<Publicacion> publicaciones = new PublicacionServices().listaPublicacion();
+            List<Publicacion> publicaciones = new PublicacionServices().listaPublicacion(u.getId());
 
             for( Publicacion p:publicaciones ){
                 p.setLeGusta(LikePublicacionServices.getInstancia().getLikesByPublicacionYUsuarioID(p.getId(), u.getId()));
