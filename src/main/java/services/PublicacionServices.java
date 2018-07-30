@@ -31,7 +31,7 @@ public class PublicacionServices extends GestionDb<Publicacion>{
 
     public List<Publicacion> listaPublicacion() {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("select a from Publicacion a order by a.id desc");
+        Query query = em.createQuery("select p from Publicacion p where  p.usuario in ( select a.amigo from Usuario u join u.amigos a) order by p.id desc");
         List<Publicacion> lista = query.getResultList();
         em.close();
         return lista;

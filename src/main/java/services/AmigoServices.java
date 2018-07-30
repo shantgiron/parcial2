@@ -38,10 +38,9 @@ public class AmigoServices extends GestionDb<Amigo> {
         //notifico
         Notificacion n = new Notificacion();
 
-        n.setDescripcion("<a href='/perfil?usuario='" + usuario1.getId() +">" + usuario1.getNombre() + " " + usuario1.getApellido() + "</a>, quiere agregarte." );
+        n.setDescripcion(usuario1.getNombre() + " " + usuario1.getApellido() +", quiere agregarte." );
         n.setVinculo("/aceptar?amigo=" + usuario1.getId());
-
-        usuario2.getNotificiones().add(n);
+        usuario2.getNotificaciones().add(n);
         UsuarioServices.getInstancia().editar(usuario2);
 
         return true;

@@ -1,8 +1,42 @@
 <header th:fragment="encabezado" class="header" id="site-header" xmlns:th="http://www.w3.org/1999/xhtml">
 
     <div class="header-content-wrapper">
-        <a href="/inicio" class="link-find-friend"> Cara de Libro </a>
+        <!--<a href="/inicio" class="link-find-friend"> Cara de Libro </a>-->
         <div class="control-block">
+
+            <div class="control-icon more has-items">
+                <svg class="olymp-thunder-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-thunder-icon"></use></svg>
+
+                <!--<div class="label-avatar bg-primary" th:text=" ${#lists.size(usuario.notificaciones)}"></div>-->
+
+                <div class="more-dropdown more-with-triangle triangle-top-center">
+                    <div class="ui-block-title ui-block-title-small">
+                        <h6 class="title">Notificaciones</h6>
+                        <!--<a href="#">Mark all as read</a>-->
+                    </div>
+
+                    <div class="mCustomScrollbar" data-mcs-theme="dark">
+                        <ul class="notification-list">
+                            <div th:each="notificacion : ${usuario.notificaciones}">
+                                <li class="un-read">
+                                    <a  href="#" th:href="|${notificacion.vinculo}|">
+                                        <div class="author-thumb">
+                                            <img src="img/avatar62-sm.jpg" height="40" width="40" alt="author">
+                                        </div>
+                                        <div class="notification-event">
+                                            <div class="h6 notification-friend" th:text="${notificacion.descripcion}"> <a href="#" class="notification-link">ejemplo de link</a>.</div>
+                                            <!--<div class="h6 notification-friend"> <a href="#" class="notification-link">ejemplo de link</a>.</div>-->
+                                            <!--<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18" th:val="${notificacion.fecha}">4 hours ago</time></span>-->
+                                        </div>
+                                    </a>
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <a href="#" class="view-all bg-primary">Ver todas las notificaciones</a>
+                </div>
+            </div>
 
             <div class="author-page author vcard inline-items more">
                 <div class="author-thumb">
@@ -39,8 +73,6 @@
                     <span class="author-subtitle" th:text="${usuario.correo}">Tu Correo</span>
                 </a>
             </div>
-
         </div>
     </div>
-
 </header>

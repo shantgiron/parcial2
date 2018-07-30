@@ -9,13 +9,7 @@ public class Amigo {
     @GeneratedValue
     private Long id;
 
-    public Usuario getAmigo() {
-        return amigo;
-    }
 
-    public void setAmigo(Usuario amigo) {
-        this.amigo = amigo;
-    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Usuario amigo;
@@ -26,6 +20,13 @@ public class Amigo {
 
     public Amigo(){}
 
+    public Usuario getAmigo() {
+        return amigo;
+    }
+
+    public void setAmigo(Usuario amigo) {
+        this.amigo = amigo;
+    }
 
     public Long getId() {
         return id;

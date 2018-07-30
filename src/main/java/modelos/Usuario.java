@@ -1,9 +1,11 @@
 package modelos;
 
 import org.hibernate.annotations.CreationTimestamp;
+import services.PublicacionServices;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 
@@ -37,12 +39,22 @@ public class Usuario{
 
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Notificacion> notificiones;
+    private Set<Notificacion> notificaciones;
 
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Amigo> amigos;
 
+    public List<Publicacion> getPublicaciones() {
+        return PublicacionServices.getInstancia().listaPublicacionByUduarioID(id);
+    }
+
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
+    }
+
+    @Transient
+    private List<Publicacion> publicaciones;
 
 
 
@@ -155,12 +167,12 @@ public class Usuario{
         this.fotoPerfil = fotoPerfil;
     }
 
-    public Set<Notificacion> getNotificiones() {
-        return notificiones;
+    public Set<Notificacion> getNotificaciones() {
+        return notificaciones;
     }
 
-    public void setNotificiones(Set<Notificacion> notificiones) {
-        this.notificiones = notificiones;
+    public void setNotificaciones(Set<Notificacion> notificacions) {
+        this.notificaciones = notificacions;
     }
     public Set<Amigo> getAmigos() {
         return amigos;

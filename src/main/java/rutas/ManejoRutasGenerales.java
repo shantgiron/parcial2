@@ -93,17 +93,25 @@ public class ManejoRutasGenerales {
         get("/solicitar", (request, response) -> {
             long amigoid = Long.parseLong(request.queryParams("amigo"));
             AmigoServices.getInstancia().solicitarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
-
+            response.redirect("/perfil?usuario=" + amigoid);
            return "";
         });
 
         get("/aceptar", (request, response) -> {
             long amigoid = Long.parseLong(request.queryParams("amigo"));
             AmigoServices.getInstancia().aceptarAmigo(UsuarioServices.getLogUser(request), UsuarioServices.getInstancia().getUsuario(amigoid));
-
-           return "";
+           response.redirect("/perfil?usuario=" + amigoid);
+            return "";
         });
 
+
+        /*
+        get("/amigos", (request, response) -> {
+            Map<String, Object> modelo = new HashMap<>();
+            modelo.put("hola", AmigoServices.getInstancia().getAmigosByUsuarioID(UsuarioServices.getLogUser(request).getId()));
+            return modelo;
+        });
+        */
     }
 
     private static Object procesarParametros(Request request, Response response){

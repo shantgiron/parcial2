@@ -1,9 +1,9 @@
 package modelos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Notificacion {
@@ -17,6 +17,29 @@ public class Notificacion {
     @Column(columnDefinition = "text")
     private String vinculo;
 
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+
+
+    @Column(columnDefinition =  "boolean default false")
+    private boolean leido;
+
+    public boolean isLeido() {
+        return leido;
+    }
+
+    public void setLeido(boolean leido) {
+        this.leido = leido;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
     public Long getId() {
         return id;
